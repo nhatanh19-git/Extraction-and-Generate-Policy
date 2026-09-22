@@ -1,0 +1,17 @@
+{
+  "permit": [
+    "permit", "allow", "authorize", "can", "may", "grant", "entitle",
+    "approve", "enable", "let", "access", "give",
+    "permitted", "allowed", "authorized", "entitled", "approved",
+    "is permitted", "is allowed", "is authorized", "is entitled",
+    "are permitted", "are allowed", "are authorized",
+    "shall", "should", "will", "must", "have permission", "has permission"
+  ],
+  "deny": [
+    "deny", "prohibit", "forbid", "restrict", "prevent", "block", "refuse",
+    "denied", "prohibited", "forbidden", "restricted", "prevented", "blocked",
+    "is denied", "is prohibited", "is forbidden", "is restricted",
+    "are denied", "are prohibited", "shall not", "must not", "cannot",
+    "will not", "disallow", "disallowed", "revoke", "revoked"
+  ]
+}

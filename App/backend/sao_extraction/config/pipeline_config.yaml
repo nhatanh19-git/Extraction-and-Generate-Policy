@@ -1,0 +1,39 @@
+# SAO Extraction Pipeline Configuration
+# Version 1.0 — Rule-Based / Pure-NLP (dependency parsing + Gazetteer)
+#
+# Changelog
+# ---------
+# v1.0 (current) : Rule-based pipeline (dependency parsing + Gazetteer)
+# v2.0 (planned) : Hybrid Rule+CNN — add CNN attribute-value classifier
+#                  (mirrors Alohaly, Takabi & Blanco 2019 architecture)
+# v3.0 (planned) : SRL layer — add Semantic Role Labeling (AllenNLP/spaCy)
+# v4.0 (planned) : LLM few-shot — add LLM-based extractor with few-shot prompts
+#
+# To run an ablation study: set any component to false.
+# The pipeline will skip disabled components without crashing.
+
+version: "1.0"
+
+# NLP model name — injected into SAOPipeline, never hardcoded in component logic.
+# Options: en_core_web_sm (fast, default), en_core_web_md, en_core_web_lg,
+#          en_core_web_trf (transformer, most accurate but requires GPU/large RAM)
+model_name: "en_core_web_sm"
+
+# Gazetteer data file paths (relative to project root)
+gazetteers:
+  effect_terms: "backend/sao_extraction/gazetteers/data/effect_terms.json"
+  subject_roles: "backend/sao_extraction/gazetteers/data/subject_roles.json"
+  resource_types: "backend/sao_extraction/gazetteers/data/resource_types.json"
+
+# Component enable/disable map — set to false for ablation studies.
+# Order of execution is fixed in RuleBasedSAOExtractor._register_components(),
+# not here. This map only controls whether each component is skipped at runtime.
+components:
+  preprocessing: true          # Contraction expansion + whitespace normalization
+  clause_segmentation: true    # Independent clause splitting (conj/cc at ROOT)
+  voice_polarity: true         # Voice (active/passive) + Effect (Permit/Deny) + Negation
+  subject_extraction: true     # nsubj / agent>pobj + NP expansion
+  action_extraction: true      # xcomp priority + prt phrasal verb
+  object_extraction: true      # dobj/attr/oprd + prep>pobj + conj
+  attribute_attachment: true   # PP-modifier + relcl → AttributeConstraint
+  gazetteer_validation: true   # Confidence scoring + SAOTriplet assembly

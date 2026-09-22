@@ -1,0 +1,242 @@
+{
+  "description": "Shared NLACP policy sentence fixtures for SAO pipeline unit tests. Each entry has: sentence, expected_subject, expected_action, expected_objects (list), expected_effect, expected_voice.",
+  "version": "1.0",
+  "categories": {
+    "simple_active": [
+      {
+        "id": "sa_01",
+        "sentence": "The attending physician can review patient files.",
+        "expected_subject": "attending physician",
+        "expected_action": "review",
+        "expected_objects": ["patient files"],
+        "expected_effect": "Permit",
+        "expected_voice": "active"
+      },
+      {
+        "id": "sa_02",
+        "sentence": "Researchers may retrieve anonymized clinical datasets.",
+        "expected_subject": "Researchers",
+        "expected_action": "retrieve",
+        "expected_objects": ["anonymized clinical datasets"],
+        "expected_effect": "Permit",
+        "expected_voice": "active"
+      },
+      {
+        "id": "sa_03",
+        "sentence": "The system administrator can delete user accounts.",
+        "expected_subject": "system administrator",
+        "expected_action": "delete",
+        "expected_objects": ["user accounts"],
+        "expected_effect": "Permit",
+        "expected_voice": "active"
+      },
+      {
+        "id": "sa_04",
+        "sentence": "Managers may view financial reports.",
+        "expected_subject": "Managers",
+        "expected_action": "view",
+        "expected_objects": ["financial reports"],
+        "expected_effect": "Permit",
+        "expected_voice": "active"
+      },
+      {
+        "id": "sa_05",
+        "sentence": "Students can access course materials.",
+        "expected_subject": "Students",
+        "expected_action": "access",
+        "expected_objects": ["course materials"],
+        "expected_effect": "Permit",
+        "expected_voice": "active"
+      }
+    ],
+    "passive": [
+      {
+        "id": "ps_01",
+        "sentence": "Patient records can be accessed by authorized nurses.",
+        "expected_subject": "authorized nurses",
+        "expected_action": "access",
+        "expected_objects": ["Patient records"],
+        "expected_effect": "Permit",
+        "expected_voice": "passive"
+      },
+      {
+        "id": "ps_02",
+        "sentence": "The database is permitted to be queried by researchers.",
+        "expected_subject": "researchers",
+        "expected_action": "query",
+        "expected_objects": ["database"],
+        "expected_effect": "Permit",
+        "expected_voice": "passive"
+      },
+      {
+        "id": "ps_03",
+        "sentence": "Authorized laboratory staff are permitted to update test results.",
+        "expected_subject": "Authorized laboratory staff",
+        "expected_action": "update",
+        "expected_objects": ["test results"],
+        "expected_effect": "Permit",
+        "expected_voice": "passive"
+      },
+      {
+        "id": "ps_04",
+        "sentence": "Medical records are not allowed to be modified by guests.",
+        "expected_subject": "guests",
+        "expected_action": "modify",
+        "expected_objects": ["Medical records"],
+        "expected_effect": "Deny",
+        "expected_voice": "passive"
+      },
+      {
+        "id": "ps_05",
+        "sentence": "Reports are allowed to be downloaded by employees.",
+        "expected_subject": "employees",
+        "expected_action": "download",
+        "expected_objects": ["Reports"],
+        "expected_effect": "Permit",
+        "expected_voice": "passive"
+      }
+    ],
+    "negation": [
+      {
+        "id": "ng_01",
+        "sentence": "Guests cannot access restricted files.",
+        "expected_subject": "Guests",
+        "expected_action": "access",
+        "expected_objects": ["restricted files"],
+        "expected_effect": "Deny",
+        "expected_voice": "active"
+      },
+      {
+        "id": "ng_02",
+        "sentence": "Researchers may not retrieve patient identifiers.",
+        "expected_subject": "Researchers",
+        "expected_action": "retrieve",
+        "expected_objects": ["patient identifiers"],
+        "expected_effect": "Deny",
+        "expected_voice": "active"
+      },
+      {
+        "id": "ng_03",
+        "sentence": "Users must not delete system logs.",
+        "expected_subject": "Users",
+        "expected_action": "delete",
+        "expected_objects": ["system logs"],
+        "expected_effect": "Deny",
+        "expected_voice": "active"
+      },
+      {
+        "id": "ng_04",
+        "sentence": "Staff should not share confidential documents.",
+        "expected_subject": "Staff",
+        "expected_action": "share",
+        "expected_objects": ["confidential documents"],
+        "expected_effect": "Deny",
+        "expected_voice": "active"
+      },
+      {
+        "id": "ng_05",
+        "sentence": "Customers are not permitted to view internal reports.",
+        "expected_subject": "Customers",
+        "expected_action": "view",
+        "expected_objects": ["internal reports"],
+        "expected_effect": "Deny",
+        "expected_voice": "active"
+      }
+    ],
+    "coordination": [
+      {
+        "id": "co_01",
+        "sentence": "An on-call senior nurse may change the list of approved lab procedures.",
+        "expected_subject": "on-call senior nurse",
+        "expected_action": "change",
+        "expected_objects": ["list"],
+        "expected_effect": "Permit",
+        "expected_voice": "active"
+      },
+      {
+        "id": "co_02",
+        "sentence": "Doctors may view records and nurses may update them.",
+        "expected_subjects": ["Doctors", "nurses"],
+        "expected_actions": ["view", "update"],
+        "expected_effects": ["Permit", "Permit"],
+        "expected_voice": "active",
+        "note": "Multi-clause coordination test"
+      },
+      {
+        "id": "co_03",
+        "sentence": "Employees can read and download reports.",
+        "expected_subject": "Employees",
+        "expected_actions": ["read", "download"],
+        "expected_objects": ["reports"],
+        "expected_effect": "Permit",
+        "expected_voice": "active"
+      },
+      {
+        "id": "co_04",
+        "sentence": "Managers may approve or reject requests.",
+        "expected_subject": "Managers",
+        "expected_actions": ["approve", "reject"],
+        "expected_objects": ["requests"],
+        "expected_effect": "Permit",
+        "expected_voice": "active"
+      },
+      {
+        "id": "co_05",
+        "sentence": "Physicians can access patient files and lab results.",
+        "expected_subject": "Physicians",
+        "expected_action": "access",
+        "expected_objects": ["patient files", "lab results"],
+        "expected_effect": "Permit",
+        "expected_voice": "active"
+      }
+    ],
+    "nested_relcl": [
+      {
+        "id": "nr_01",
+        "sentence": "Users who are authenticated can access the database.",
+        "expected_subject": "Users",
+        "expected_action": "access",
+        "expected_objects": ["database"],
+        "expected_effect": "Permit",
+        "expected_voice": "active",
+        "expected_constraint_relation": "who"
+      },
+      {
+        "id": "nr_02",
+        "sentence": "Documents that are classified as confidential cannot be shared.",
+        "expected_subject": null,
+        "expected_action": "share",
+        "expected_objects": ["Documents"],
+        "expected_effect": "Deny",
+        "expected_voice": "passive"
+      },
+      {
+        "id": "nr_03",
+        "sentence": "Staff members who have clearance may view restricted records.",
+        "expected_subject": "Staff members",
+        "expected_action": "view",
+        "expected_objects": ["restricted records"],
+        "expected_effect": "Permit",
+        "expected_voice": "active"
+      },
+      {
+        "id": "nr_04",
+        "sentence": "The physician who is on duty can prescribe medications.",
+        "expected_subject": "physician",
+        "expected_action": "prescribe",
+        "expected_objects": ["medications"],
+        "expected_effect": "Permit",
+        "expected_voice": "active"
+      },
+      {
+        "id": "nr_05",
+        "sentence": "Resources that belong to the system cannot be deleted by users.",
+        "expected_subject": "users",
+        "expected_action": "delete",
+        "expected_objects": ["Resources"],
+        "expected_effect": "Deny",
+        "expected_voice": "passive"
+      }
+    ]
+  }
+}
