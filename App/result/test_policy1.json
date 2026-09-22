@@ -1,0 +1,151 @@
+[
+    {
+        "id": 1,
+        "policy_text": "A user can add an item with topic \"note\" in his/her own HR.",
+        "rule": {
+            "effect": "Permit",
+            "subjects": [
+                {
+                    "attribute": "role",
+                    "operator": "IN",
+                    "values": [
+                        "a user"
+                    ]
+                }
+            ],
+            "actions": [
+                "add"
+            ],
+            "resources": [
+                {
+                    "attribute": "type",
+                    "operator": "IN",
+                    "values": [
+                        "an item with topic \"note\""
+                    ]
+                }
+            ],
+            "constraints": []
+        }
+    },
+    {
+        "id": 2,
+        "policy_text": "A user can add an item with topic \"note\" in the HR of a patient for which he/she is an agent.",
+        "rule": {
+            "effect": "Permit",
+            "subjects": [
+                {
+                    "attribute": "role",
+                    "operator": "IN",
+                    "values": [
+                        "a user"
+                    ]
+                }
+            ],
+            "actions": [
+                "add"
+            ],
+            "resources": [
+                {
+                    "attribute": "type",
+                    "operator": "IN",
+                    "values": [
+                        "an item with topic \"note\""
+                    ]
+                }
+            ],
+            "constraints": [
+                {
+                    "attribute": "a user",
+                    "operator": "IN",
+                    "values": [
+                        ""
+                    ],
+                    "attribute_ref": null
+                }
+            ]
+        }
+    },
+    {
+        "id": 3,
+        "policy_text": "A user can read an item in a HR for a patient treated by one of the teams of which he/she is a member, if the topics of the item are among his/her specialties.",
+        "rule": {
+            "effect": "Permit",
+            "subjects": [
+                {
+                    "attribute": "role",
+                    "operator": "IN",
+                    "values": [
+                        "a user"
+                    ]
+                }
+            ],
+            "actions": [
+                "read",
+                "be"
+            ],
+            "resources": [
+                {
+                    "attribute": "type",
+                    "operator": "IN",
+                    "values": [
+                        "an item"
+                    ]
+                },
+                {
+                    "attribute": "type",
+                    "operator": "IN",
+                    "values": [
+                        "a patient treated by one of the teams of which"
+                    ]
+                },
+                {
+                    "attribute": "type",
+                    "operator": "IN",
+                    "values": [
+                        "a member"
+                    ]
+                }
+            ],
+            "constraints": [
+                {
+                    "attribute": "a user",
+                    "operator": "IN",
+                    "values": [
+                        ""
+                    ],
+                    "attribute_ref": null
+                },
+                {
+                    "attribute": "a user",
+                    "operator": "IN",
+                    "values": [
+                        ""
+                    ],
+                    "attribute_ref": null
+                },
+                {
+                    "attribute": "a user",
+                    "operator": "IN",
+                    "values": [
+                        "user's"
+                    ],
+                    "attribute_ref": null
+                }
+            ]
+        }
+    },
+    {
+        "id": 4,
+        "policy_text": "done",
+        "rule": {
+            "effect": "Permit",
+            "subjects": [],
+            "actions": [
+                "do"
+            ],
+            "resources": [],
+            "constraints": []
+        }
+    }
+]

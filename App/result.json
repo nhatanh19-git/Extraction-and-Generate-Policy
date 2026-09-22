@@ -1,0 +1,11 @@
+{
+  "subject": "A user",
+  "action": "read",
+  "object": "an item",
+  "environment": "in a HR",
+  "raw_display": {
+    "subject": "A user",
+    "action": "read",
+    "object": "an item"
+  }
+}
