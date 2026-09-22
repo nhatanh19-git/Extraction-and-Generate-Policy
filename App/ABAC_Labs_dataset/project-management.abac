@@ -1,0 +1,129 @@
+# ABAC policy for a project management system.
+
+# Note that the two words "user" and "subject" are used interchangeably in this document.
+
+# Please refer to the policy description document for the detailed descriptions subject attributes and resource attributes. Note that some attributes might be irrelevant for some users and resources.
+
+#------------------------------------------------------------
+# user attribute data
+#------------------------------------------------------------
+
+# naming convention: proj<i><j> is the j'th project in department i
+
+# accountants
+userAttrib(acc1, adminRoles={accountant}, projects={proj11 proj12})
+userAttrib(acc2, adminRoles={accountant}, projects={proj21 proj22})
+
+# auditors
+userAttrib(aud1, adminRoles={auditor}, projects={proj11 proj12})
+userAttrib(aud2, adminRoles={auditor}, projects={proj21 proj22})
+
+# planners
+userAttrib(plan1, adminRoles={planner}, projects={proj11 proj12})
+userAttrib(plan2, adminRoles={planner}, projects={proj21 proj22})
+
+# managers
+userAttrib(mgr1, adminRoles={manager}, department=dept1)
+userAttrib(mgr2, adminRoles={manager}, department=dept2)
+
+# project leaders
+userAttrib(ldr11, projects={proj11 proj12}, projectsLed={proj11}, department=dept1)
+userAttrib(ldr12, projects={proj12}, projectsLed={proj12}, department=dept1)
+userAttrib(ldr2, projects={proj21 proj22}, projectsLed={proj21 proj22}, department=dept2)
+
+# technical workers - designers
+userAttrib(des11, expertise={design}, projects={proj11}, isEmployee=True, tasks={proj11task1a proj11task1propa})
+userAttrib(des12, expertise={design}, projects={proj12}, isEmployee=False, tasks={proj12task1a proj12task1propa})
+userAttrib(des21, expertise={design}, projects={proj21}, isEmployee=True, tasks={proj21task1a proj21task1propa})
+userAttrib(des22, expertise={design}, projects={proj22}, isEmployee=False, tasks={proj22task1a proj22task1propa})
+
+# technical workers - coders
+userAttrib(code11, expertise={coding}, projects={proj11}, isEmployee=True, tasks={proj11task2a proj11task2propa})
+userAttrib(code12, expertise={coding}, projects={proj12}, isEmployee=False, tasks={proj12task2a proj12task2propa})
+userAttrib(code21, expertise={coding}, projects={proj21}, isEmployee=True, tasks={proj21task2a proj21task2propa})
+userAttrib(code22, expertise={coding}, projects={proj22}, isEmployee=False, tasks={proj22task2a proj22task2propa})
+
+#------------------------------------------------------------
+# resource attribute data
+#------------------------------------------------------------
+
+# for each project, for each area of expertise, for proprietary in
+# {True,False}, there is an assigned task (whose rid ends with "a") and an
+# unassigned task.
+
+# proj11
+resourceAttrib(proj11budget,type=budget, project=proj11, department=dept1)
+resourceAttrib(proj11sched, type=schedule, project=proj11, department=dept1)
+# un-proprietary tasks
+resourceAttrib(proj11task1a, type=task, project=proj11, department=dept1, expertise={design}, proprietary=False)
+resourceAttrib(proj11task2a, type=task, project=proj11, department=dept1, expertise={coding}, proprietary=False)
+resourceAttrib(proj11task1, type=task, project=proj11, department=dept1, expertise={design}, proprietary=False)
+resourceAttrib(proj11task2, type=task, project=proj11, department=dept1, expertise={coding}, proprietary=False)
+# proprietary tasks
+resourceAttrib(proj11task1propa, type=task, project=proj11, department=dept1, expertise={design}, proprietary=True)
+resourceAttrib(proj11task2propa, type=task, project=proj11, department=dept1, expertise={coding}, proprietary=True)
+resourceAttrib(proj11task1prop, type=task, project=proj11, department=dept1, expertise={design}, proprietary=True)
+resourceAttrib(proj11task2prop, type=task, project=proj11, department=dept1, expertise={coding}, proprietary=True)
+
+# proj12
+resourceAttrib(proj12budget,type=budget, project=proj12, department=dept1)
+resourceAttrib(proj12sched, type=schedule, project=proj12, department=dept1)
+# un-proprietary tasks
+resourceAttrib(proj12task1a, type=task, project=proj12, department=dept1, expertise={design}, proprietary=False)
+resourceAttrib(proj12task2a, type=task, project=proj12, department=dept1, expertise={coding}, proprietary=False)
+resourceAttrib(proj12task1, type=task, project=proj12, department=dept1, expertise={design}, proprietary=False)
+resourceAttrib(proj12task2, type=task, project=proj12, department=dept1, expertise={coding}, proprietary=False)
+# proprietary tasks
+resourceAttrib(proj12task1propa, type=task, project=proj12, department=dept1, expertise={design}, proprietary=True)
+resourceAttrib(proj12task2propa, type=task, project=proj12, department=dept1, expertise={coding}, proprietary=True)
+resourceAttrib(proj12task1prop, type=task, project=proj12, department=dept1, expertise={design}, proprietary=True)
+resourceAttrib(proj12task2prop, type=task, project=proj12, department=dept1, expertise={coding}, proprietary=True)
+
+# proj21
+resourceAttrib(proj21budget,type=budget, project=proj21, department=dept2)
+resourceAttrib(proj21sched, type=schedule, project=proj21, department=dept2)
+# un-proprietary tasks
+resourceAttrib(proj21task1a, type=task, project=proj21, department=dept2, expertise={design}, proprietary=False)
+resourceAttrib(proj21task2a, type=task, project=proj21, department=dept2, expertise={coding}, proprietary=False)
+resourceAttrib(proj21task1, type=task, project=proj21, department=dept2, expertise={design}, proprietary=False)
+resourceAttrib(proj21task2, type=task, project=proj21, department=dept2, expertise={coding}, proprietary=False)
+# proprietary tasks
+resourceAttrib(proj21task1propa, type=task, project=proj21, department=dept2, expertise={design}, proprietary=True)
+resourceAttrib(proj21task2propa, type=task, project=proj21, department=dept2, expertise={coding}, proprietary=True)
+resourceAttrib(proj21task1prop, type=task, project=proj21, department=dept2, expertise={design}, proprietary=True)
+resourceAttrib(proj21task2prop, type=task, project=proj21, department=dept2, expertise={coding}, proprietary=True)
+
+# proj22
+resourceAttrib(proj22budget,type=budget, project=proj22, department=dept2)
+resourceAttrib(proj22sched, type=schedule, project=proj22, department=dept2)
+# un-proprietary tasks
+resourceAttrib(proj22task1a, type=task, project=proj22, department=dept2, expertise={design}, proprietary=False)
+resourceAttrib(proj22task2a, type=task, project=proj22, department=dept2, expertise={coding}, proprietary=False)
+resourceAttrib(proj22task1, type=task, project=proj22, department=dept2, expertise={design}, proprietary=False)
+resourceAttrib(proj22task2, type=task, project=proj22, department=dept2, expertise={coding}, proprietary=False)
+# proprietary tasks
+resourceAttrib(proj22task1propa, type=task, project=proj22, department=dept2, expertise={design}, proprietary=True)
+resourceAttrib(proj22task2propa, type=task, project=proj22, department=dept2, expertise={coding}, proprietary=True)
+resourceAttrib(proj22task1prop, type=task, project=proj22, department=dept2, expertise={design}, proprietary=True)
+resourceAttrib(proj22task2prop, type=task, project=proj22, department=dept2, expertise={coding}, proprietary=True)
+
+#------------------------------------------------------------
+# rules
+#------------------------------------------------------------
+
+# 1.	A project leader can read and write the project schedule and budget
+rule( ; type [ {schedule budget}; {read write}; projectsLed ] project)
+
+# 2.	A user working on a project can read the project schedule
+rule( ; type [ {schedule}; {read}; projects ] project)
+
+# 3.	A user can update the status of tasks assigned to him/her
+rule( ; type [ {task}; {setStatus}; tasks ] rid)
+
+# 4.	A user working on a project can read and request to work on a non-proprietary
+# task whose required areas of expertise are among his/her areas of expertise
+rule( ; type [ {task}, proprietary [ {False}; {request read}; projects ] project, expertise > expertise)
+
+# 5.	An employee working on a project can read and request to work on any
+# task whose required areas of expertise are among his/her areas of expertise
+rule(isEmployee [ {True} ; type [ {task}; {request read}; projects ] project, expertise > expertise)

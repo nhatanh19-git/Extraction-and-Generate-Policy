@@ -1,0 +1,148 @@
+# ABAC policy for a university.
+
+# Note that the two words "user" and "subject" are used interchangeably in this document.
+
+# Please refer to the policy description document for the detailed descriptions subject attributes and resource attributes. Note that some attributes might be irrelevant for some users and resources.
+
+#------------------------------------------------------------
+# user attribute data
+#------------------------------------------------------------
+
+# applicants for admission to the university
+
+userAttrib(applicant1, position=applicant)
+userAttrib(applicant2, position=applicant)
+
+# students
+
+userAttrib(csStu1, position=student, department=cs, crsTaken={cs101})
+userAttrib(csStu2, position=student, department=cs, crsTaken={cs601}, crsTaught={cs101 cs602})
+userAttrib(csStu3, position=student, department=cs, crsTaken={cs602}, crsTaught={cs601})
+userAttrib(csStu4, position=student, department=cs, crsTaken={cs601})
+userAttrib(csStu5, position=student, department=cs, crsTaken={cs601 cs602})
+
+userAttrib(eeStu1, position=student, department=ee, crsTaken={ee101})
+userAttrib(eeStu2, position=student, department=ee, crsTaken={ee601}, crsTaught={ee101 ee602})
+userAttrib(eeStu3, position=student, department=ee, crsTaken={ee602}, crsTaught={ee601})
+userAttrib(eeStu4, position=student, department=ee, crsTaken={ee601})
+userAttrib(eeStu5, position=student, department=ee, crsTaken={ee601 ee602})
+
+# faculty
+
+userAttrib(csFac1, position=faculty, department=cs, crsTaught={cs101})
+userAttrib(csFac2, position=faculty, department=cs, crsTaught={cs601})
+userAttrib(csChair, isChair=True, department=cs)
+
+userAttrib(eeFac1, position=faculty, department=ee, crsTaught={ee101})
+userAttrib(eeFac2, position=faculty, department=ee, crsTaught={ee601})
+userAttrib(eeChair, isChair=True, department=ee)
+
+# staff
+
+userAttrib(registrar1, position=staff, department=registrar)
+userAttrib(registrar2, position=staff, department=registrar)
+
+userAttrib(admissions1, position=staff, department=admissions)
+userAttrib(admissions2, position=staff, department=admissions)
+
+#------------------------------------------------------------
+# resource attribute data
+#------------------------------------------------------------
+
+# applications.  applications exist for applicants and students (accepted
+# applicants).
+
+resourceAttrib(application1, type=application, student=applicant1)
+resourceAttrib(application2, type=application, student=applicant2)
+
+resourceAttrib(csStu1application, type=application, student=csStu1)
+resourceAttrib(csStu2application, type=application, student=csStu2)
+resourceAttrib(csStu3application, type=application, student=csStu3)
+resourceAttrib(csStu4application, type=application, student=csStu4)
+resourceAttrib(csStu5application, type=application, student=csStu5)
+
+resourceAttrib(eeStu1application, type=application, student=eeStu1)
+resourceAttrib(eeStu2application, type=application, student=eeStu2)
+resourceAttrib(eeStu3application, type=application, student=eeStu3)
+resourceAttrib(eeStu4application, type=application, student=eeStu4)
+resourceAttrib(eeStu5application, type=application, student=eeStu5)
+
+# gradebooks
+
+resourceAttrib(cs101gradebook, departments={cs}, crs=cs101, type=gradebook)
+resourceAttrib(cs601gradebook, departments={cs}, crs=cs601, type=gradebook)
+resourceAttrib(cs602gradebook, departments={cs}, crs=cs602, type=gradebook)
+
+resourceAttrib(ee101gradebook, departments={ee}, crs=ee101, type=gradebook)
+resourceAttrib(ee601gradebook, departments={ee}, crs=ee601, type=gradebook)
+resourceAttrib(ee602gradebook, departments={ee}, crs=ee602, type=gradebook)
+
+# rosters
+
+resourceAttrib(cs101roster, departments={cs}, crs=cs101, type=roster)
+resourceAttrib(cs601roster, departments={cs}, crs=cs601, type=roster)
+resourceAttrib(cs602roster, departments={cs}, crs=cs602, type=roster)
+
+resourceAttrib(ee101roster, departments={ee}, crs=ee101, type=roster)
+resourceAttrib(ee601roster, departments={ee}, crs=ee601, type=roster)
+resourceAttrib(ee602roster, departments={ee}, crs=ee602, type=roster)
+
+# transcripts
+
+resourceAttrib(csStu1trans, student=csStu1, departments={cs}, type=transcript)
+resourceAttrib(csStu2trans, student=csStu2, departments={cs}, type=transcript)
+resourceAttrib(csStu3trans, student=csStu3, departments={cs}, type=transcript)
+resourceAttrib(csStu4trans, student=csStu4, departments={cs}, type=transcript)
+resourceAttrib(csStu5trans, student=csStu5, departments={cs}, type=transcript)
+
+resourceAttrib(eeStu1trans, student=eeStu1, departments={ee}, type=transcript)
+resourceAttrib(eeStu2trans, student=eeStu2, departments={ee}, type=transcript)
+resourceAttrib(eeStu3trans, student=eeStu3, departments={ee}, type=transcript)
+resourceAttrib(eeStu4trans, student=eeStu4, departments={ee}, type=transcript)
+resourceAttrib(eeStu5trans, student=eeStu5, departments={ee}, type=transcript)
+
+#------------------------------------------------------------
+# rules for gradebooks
+#------------------------------------------------------------
+
+# 1.	A user can read his/her own scores in gradebooks for courses they have taken.
+rule(; type [ {gradebook}; {readMyScores}; crsTaken ] crs)
+
+# 2.	The instructor or TA can add scores and read scores in the gradebook for courses that they are teaching. 
+rule(; type [ {gradebook}; {addScore readScore}; crsTaught ] crs)
+
+# 3.	The instructor for a course can change scores and assign final grades in the gradebook for that course.
+rule(position [ {faculty}; type [ {gradebook}; {changeScore assignGrade}; crsTaught ] crs)
+
+#------------------------------------------------------------
+# rules for rosters
+#------------------------------------------------------------
+
+# 4.	A user in registrar’s office can read and modify all rosters.
+rule(department [ {registrar}; type [ {roster}; {read write}; )
+
+# 5.	The instructor of a course can read the course roster.
+rule(position [ {faculty}; type [ {roster}; {read}; crsTaught ] crs)
+
+#------------------------------------------------------------
+# rules for transcripts
+#------------------------------------------------------------
+
+# 6.	A user can read their own transcript. 
+rule(; type [ {transcript}; {read}; uid=student)
+
+# 7.	The chair of a department can read the transcripts of all students in that department. 
+rule(isChair [ {True}; type [ {transcript}; {read}; department [ departments)
+
+# 8.	A user in the registrar’s office can read every student’s transcript.
+rule(department [ {registrar}; type [ {transcript}; {read}; )
+
+#------------------------------------------------------------
+# rules for applications for admission
+#------------------------------------------------------------
+
+# 9.	A user can check the status of their own application. 
+rule(; type [ {application}; {checkStatus}; uid=student)
+
+# 10.	A user in the admissions office can read and update the status of every application. 
+rule(department [ {admissions}; type [ {application}; {read setStatus}; )

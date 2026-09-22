@@ -1,0 +1,812 @@
+# ABAC policy for a workforce management system.
+
+#------------------------------------------------------------
+# User Attribute Data
+#------------------------------------------------------------
+
+# applicationAdmin
+userAttrib(appadmin001, position=applicationAdmin, department=admin, provider=eWorkforce)
+
+# workforceManager
+userAttrib(wfmgr001, position=workforceManager, department=workforce, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, managedStaff={tech001 tech002}, isCustomerSupport=False, group=techSupport)
+userAttrib(wfmgr002, position=workforceManager, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, managedStaff={tech003}, isCustomerSupport=False, group=none)
+userAttrib(wfmgr003, position=workforceManager, department=workforce, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, managedStaff={tech004 tech005 tech006}, isCustomerSupport=False, group=none)
+userAttrib(wfmgr004, position=workforceManager, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={tech007 tech008 tech009}, isCustomerSupport=False, group=none)
+userAttrib(wfmgr005, position=workforceManager, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=north, managedStaff={tech010 tech011 tech012}, isCustomerSupport=False, group=none)
+userAttrib(wfmgr006, position=workforceManager, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={tech013 tech014}, isCustomerSupport=False, group=provisioning)
+userAttrib(wfmgr007, position=workforceManager, department=workforce, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, managedStaff={tech015 tech016}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(wfmgr008, position=workforceManager, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, managedStaff={tech017 tech018}, isCustomerSupport=True, group=companySupport)
+userAttrib(wfmgr009, position=workforceManager, department=workforce, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, managedStaff={tech019}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(wfmgr010, position=workforceManager, department=workforce, provider=externalWorkforceSupplier, assignedTenant=powerProtection, assignedRegion=south, managedStaff={tech020 tech021 tech022}, isCustomerSupport=False, group=none)
+userAttrib(wfmgr011, position=workforceManager, department=workforce, provider=subcontractor, assignedTenant=telco, assignedRegion=north, managedStaff={tech023}, isCustomerSupport=False, group=none)
+userAttrib(wfmgr012, position=workforceManager, department=workforce, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, managedStaff={tech024 tech025 tech026}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(wfmgr013, position=workforceManager, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=north, managedStaff={tech027}, isCustomerSupport=False, group=none)
+userAttrib(wfmgr014, position=workforceManager, department=workforce, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, managedStaff={tech028 tech029}, isCustomerSupport=True, group=companySupport)
+userAttrib(wfmgr015, position=workforceManager, department=workforce, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, managedStaff={tech030}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(wfmgr016, position=workforceManager, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={tech031 tech032 tech033}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(wfmgr017, position=workforceManager, department=workforce, provider=subcontractor, assignedTenant=telco, assignedRegion=south, managedStaff={tech034 tech035}, isCustomerSupport=False, group=none)
+userAttrib(wfmgr018, position=workforceManager, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={tech036 tech037}, isCustomerSupport=True, group=companySupport)
+userAttrib(wfmgr019, position=workforceManager, department=workforce, provider=subcontractor, assignedTenant=telco, assignedRegion=south, managedStaff={tech038 tech039 tech040}, isCustomerSupport=True, group=companySupport)
+userAttrib(wfmgr020, position=workforceManager, department=workforce, provider=externalWorkforceSupplier, assignedTenant=powerProtection, assignedRegion=south, managedStaff={tech041 tech042}, isCustomerSupport=True, group=companySupport)
+userAttrib(wfmgr021, position=workforceManager, department=workforce, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, managedStaff={tech043}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(wfmgr022, position=workforceManager, department=workforce, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, managedStaff={tech044 tech045 tech046}, isCustomerSupport=True, group=companySupport)
+userAttrib(wfmgr023, position=workforceManager, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=north, managedStaff={tech047}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(wfmgr024, position=workforceManager, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={tech048 tech049 tech050}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(wfmgr025, position=workforceManager, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=north, managedStaff={tech051 tech052}, isCustomerSupport=False, group=none)
+userAttrib(wfmgr026, position=workforceManager, department=workforce, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=south, managedStaff={tech053 tech054 tech055}, isCustomerSupport=False, group=none)
+userAttrib(wfmgr027, position=workforceManager, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=south, managedStaff={tech056 tech057 tech058}, isCustomerSupport=False, group=none)
+userAttrib(wfmgr028, position=workforceManager, department=workforce, provider=externalWorkforceSupplier, assignedTenant=powerProtection, assignedRegion=north, managedStaff={tech059 tech060}, isCustomerSupport=False, group=none)
+userAttrib(wfmgr029, position=workforceManager, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=south, managedStaff={tech061 tech062 tech063}, isCustomerSupport=True, group=companySupport)
+userAttrib(wfmgr030, position=workforceManager, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={tech064 tech065 tech066}, isCustomerSupport=False, group=none)
+
+# technician
+userAttrib(tech001, position=technician, department=workforce, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, certifications={telcoCertifiedTechnician}, isCustomerSupport=False, group=techSupport)
+userAttrib(tech002, position=technician, department=workforce, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, certifications={telcoCertifiedTechnician}, isCustomerSupport=False, group=techSupport)
+userAttrib(tech003, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, certifications={powerProtectionSpecialist}, isCustomerSupport=False, group=none)
+userAttrib(tech004, position=technician, department=workforce, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, certifications={}, isCustomerSupport=False, group=none)
+userAttrib(tech005, position=technician, department=workforce, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, certifications={telcoCertifiedTechnician}, isCustomerSupport=False, group=none)
+userAttrib(tech006, position=technician, department=workforce, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, certifications={}, isCustomerSupport=False, group=none)
+userAttrib(tech007, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, certifications={powerProtectionSpecialist}, isCustomerSupport=False, group=none)
+userAttrib(tech008, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, certifications={}, isCustomerSupport=False, group=none)
+userAttrib(tech009, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, certifications={powerProtectionSpecialist}, isCustomerSupport=False, group=none)
+userAttrib(tech010, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=north, certifications={telcoCertifiedTechnician}, isCustomerSupport=False, group=none)
+userAttrib(tech011, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=north, certifications={}, isCustomerSupport=False, group=none)
+userAttrib(tech012, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=north, certifications={telcoCertifiedTechnician}, isCustomerSupport=False, group=none)
+userAttrib(tech013, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, certifications={powerProtectionSpecialist}, isCustomerSupport=False, group=provisioning)
+userAttrib(tech014, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, certifications={}, isCustomerSupport=False, group=provisioning)
+userAttrib(tech015, position=technician, department=workforce, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, certifications={telcoCertifiedTechnician}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(tech016, position=technician, department=workforce, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, certifications={}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(tech017, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, certifications={}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech018, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, certifications={telcoCertifiedTechnician powerProtectionSpecialist}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech019, position=technician, department=workforce, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, certifications={telcoCertifiedTechnician}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(tech020, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=powerProtection, assignedRegion=south, certifications={}, isCustomerSupport=False, group=none)
+userAttrib(tech021, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=powerProtection, assignedRegion=south, certifications={}, isCustomerSupport=False, group=none)
+userAttrib(tech022, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=powerProtection, assignedRegion=south, certifications={telcoCertifiedTechnician powerProtectionSpecialist}, isCustomerSupport=False, group=none)
+userAttrib(tech023, position=technician, department=workforce, provider=subcontractor, assignedTenant=telco, assignedRegion=north, certifications={telcoCertifiedTechnician}, isCustomerSupport=False, group=none)
+userAttrib(tech024, position=technician, department=workforce, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, certifications={}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(tech025, position=technician, department=workforce, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, certifications={}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(tech026, position=technician, department=workforce, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, certifications={}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(tech027, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=north, certifications={powerProtectionSpecialist telcoCertifiedTechnician}, isCustomerSupport=False, group=none)
+userAttrib(tech028, position=technician, department=workforce, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, certifications={telcoCertifiedTechnician powerProtectionSpecialist}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech029, position=technician, department=workforce, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, certifications={powerProtectionSpecialist}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech030, position=technician, department=workforce, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, certifications={telcoCertifiedTechnician}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(tech031, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, certifications={}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(tech032, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, certifications={telcoCertifiedTechnician powerProtectionSpecialist}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(tech033, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, certifications={powerProtectionSpecialist}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(tech034, position=technician, department=workforce, provider=subcontractor, assignedTenant=telco, assignedRegion=south, certifications={powerProtectionSpecialist telcoCertifiedTechnician}, isCustomerSupport=False, group=none)
+userAttrib(tech035, position=technician, department=workforce, provider=subcontractor, assignedTenant=telco, assignedRegion=south, certifications={}, isCustomerSupport=False, group=none)
+userAttrib(tech036, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, certifications={}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech037, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, certifications={telcoCertifiedTechnician powerProtectionSpecialist}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech038, position=technician, department=workforce, provider=subcontractor, assignedTenant=telco, assignedRegion=south, certifications={powerProtectionSpecialist telcoCertifiedTechnician}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech039, position=technician, department=workforce, provider=subcontractor, assignedTenant=telco, assignedRegion=south, certifications={telcoCertifiedTechnician}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech040, position=technician, department=workforce, provider=subcontractor, assignedTenant=telco, assignedRegion=south, certifications={telcoCertifiedTechnician}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech041, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=powerProtection, assignedRegion=south, certifications={powerProtectionSpecialist}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech042, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=powerProtection, assignedRegion=south, certifications={powerProtectionSpecialist}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech043, position=technician, department=workforce, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, certifications={telcoCertifiedTechnician}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(tech044, position=technician, department=workforce, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, certifications={}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech045, position=technician, department=workforce, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, certifications={powerProtectionSpecialist}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech046, position=technician, department=workforce, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, certifications={}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech047, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=north, certifications={powerProtectionSpecialist telcoCertifiedTechnician}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(tech048, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, certifications={powerProtectionSpecialist}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(tech049, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, certifications={powerProtectionSpecialist}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(tech050, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, certifications={telcoCertifiedTechnician powerProtectionSpecialist}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(tech051, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=north, certifications={telcoCertifiedTechnician}, isCustomerSupport=False, group=none)
+userAttrib(tech052, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=north, certifications={telcoCertifiedTechnician}, isCustomerSupport=False, group=none)
+userAttrib(tech053, position=technician, department=workforce, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=south, certifications={}, isCustomerSupport=False, group=none)
+userAttrib(tech054, position=technician, department=workforce, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=south, certifications={}, isCustomerSupport=False, group=none)
+userAttrib(tech055, position=technician, department=workforce, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=south, certifications={}, isCustomerSupport=False, group=none)
+userAttrib(tech056, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=south, certifications={}, isCustomerSupport=False, group=none)
+userAttrib(tech057, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=south, certifications={}, isCustomerSupport=False, group=none)
+userAttrib(tech058, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=south, certifications={powerProtectionSpecialist telcoCertifiedTechnician}, isCustomerSupport=False, group=none)
+userAttrib(tech059, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=powerProtection, assignedRegion=north, certifications={telcoCertifiedTechnician powerProtectionSpecialist}, isCustomerSupport=False, group=none)
+userAttrib(tech060, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=powerProtection, assignedRegion=north, certifications={}, isCustomerSupport=False, group=none)
+userAttrib(tech061, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=south, certifications={powerProtectionSpecialist telcoCertifiedTechnician}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech062, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=south, certifications={}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech063, position=technician, department=workforce, provider=externalWorkforceSupplier, assignedTenant=telco, assignedRegion=south, certifications={telcoCertifiedTechnician}, isCustomerSupport=True, group=companySupport)
+userAttrib(tech064, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, certifications={telcoCertifiedTechnician powerProtectionSpecialist}, isCustomerSupport=False, group=none)
+userAttrib(tech065, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, certifications={}, isCustomerSupport=False, group=none)
+userAttrib(tech066, position=technician, department=workforce, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, certifications={powerProtectionSpecialist}, isCustomerSupport=False, group=none)
+
+# helpdeskManager
+userAttrib(hdmgr001, position=helpdeskManager, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=south, managedStaff={hdop001 hdop002}, isCustomerSupport=False, group=provisioning)
+userAttrib(hdmgr002, position=helpdeskManager, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=powerProtection, assignedRegion=south, managedStaff={hdop003 hdop004}, isCustomerSupport=False, group=none)
+userAttrib(hdmgr003, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, managedStaff={hdop005 hdop006 hdop007}, isCustomerSupport=False, group=none)
+userAttrib(hdmgr004, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={hdop008 hdop009}, isCustomerSupport=False, group=none)
+userAttrib(hdmgr005, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, managedStaff={hdop010 hdop011 hdop012}, isCustomerSupport=True, group=companySupport)
+userAttrib(hdmgr006, position=helpdeskManager, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=powerProtection, assignedRegion=north, managedStaff={hdop013}, isCustomerSupport=True, group=companySupport)
+userAttrib(hdmgr007, position=helpdeskManager, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=south, managedStaff={hdop014 hdop015}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(hdmgr008, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={hdop016 hdop017}, isCustomerSupport=True, group=companySupport)
+userAttrib(hdmgr009, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, managedStaff={hdop018 hdop019}, isCustomerSupport=False, group=provisioning)
+userAttrib(hdmgr010, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={hdop020 hdop021}, isCustomerSupport=True, group=companySupport)
+userAttrib(hdmgr011, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, managedStaff={hdop022 hdop023 hdop024}, isCustomerSupport=False, group=provisioning)
+userAttrib(hdmgr012, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, managedStaff={hdop025 hdop026 hdop027}, isCustomerSupport=False, group=none)
+userAttrib(hdmgr013, position=helpdeskManager, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=north, managedStaff={hdop028 hdop029 hdop030}, isCustomerSupport=False, group=none)
+userAttrib(hdmgr014, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={hdop031 hdop032 hdop033}, isCustomerSupport=True, group=companySupport)
+userAttrib(hdmgr015, position=helpdeskManager, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=north, managedStaff={hdop034 hdop035}, isCustomerSupport=True, group=companySupport)
+userAttrib(hdmgr016, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, managedStaff={hdop036}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(hdmgr017, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, managedStaff={hdop037}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(hdmgr018, position=helpdeskManager, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=powerProtection, assignedRegion=north, managedStaff={hdop038}, isCustomerSupport=False, group=none)
+userAttrib(hdmgr019, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, managedStaff={hdop039 hdop040}, isCustomerSupport=False, group=none)
+userAttrib(hdmgr020, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={hdop041 hdop042}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(hdmgr021, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, managedStaff={hdop043 hdop044}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(hdmgr022, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, managedStaff={hdop045 hdop046}, isCustomerSupport=False, group=none)
+userAttrib(hdmgr023, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, managedStaff={hdop047 hdop048}, isCustomerSupport=False, group=none)
+userAttrib(hdmgr024, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={hdop049 hdop050 hdop051}, isCustomerSupport=False, group=provisioning)
+userAttrib(hdmgr025, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, managedStaff={hdop052 hdop053}, isCustomerSupport=False, group=none)
+userAttrib(hdmgr026, position=helpdeskManager, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=powerProtection, assignedRegion=south, managedStaff={hdop054 hdop055 hdop056}, isCustomerSupport=True, group=companySupport)
+userAttrib(hdmgr027, position=helpdeskManager, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=south, managedStaff={hdop057 hdop058 hdop059}, isCustomerSupport=True, group=companySupport)
+userAttrib(hdmgr028, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, managedStaff={hdop060}, isCustomerSupport=False, group=none)
+userAttrib(hdmgr029, position=helpdeskManager, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, managedStaff={hdop061 hdop062 hdop063}, isCustomerSupport=False, group=none)
+userAttrib(hdmgr030, position=helpdeskManager, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=powerProtection, assignedRegion=north, managedStaff={hdop064 hdop065}, isCustomerSupport=False, group=none)
+
+# helpdeskOperator
+userAttrib(hdop001, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=provisioning)
+userAttrib(hdop002, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=provisioning)
+userAttrib(hdop003, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(hdop004, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(hdop005, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(hdop006, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(hdop007, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(hdop008, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(hdop009, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(hdop010, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop011, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop012, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop013, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop014, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=residentialSupport)
+userAttrib(hdop015, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=residentialSupport)
+userAttrib(hdop016, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop017, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop018, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=provisioning)
+userAttrib(hdop019, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=provisioning)
+userAttrib(hdop020, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop021, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop022, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=provisioning)
+userAttrib(hdop023, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=provisioning)
+userAttrib(hdop024, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=provisioning)
+userAttrib(hdop025, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(hdop026, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(hdop027, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(hdop028, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(hdop029, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(hdop030, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(hdop031, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop032, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop033, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop034, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=north, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop035, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=north, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop036, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=True, group=residentialSupport)
+userAttrib(hdop037, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=residentialSupport)
+userAttrib(hdop038, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(hdop039, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(hdop040, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(hdop041, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=True, group=residentialSupport)
+userAttrib(hdop042, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=True, group=residentialSupport)
+userAttrib(hdop043, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=residentialSupport)
+userAttrib(hdop044, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=residentialSupport)
+userAttrib(hdop045, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(hdop046, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(hdop047, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(hdop048, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(hdop049, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=provisioning)
+userAttrib(hdop050, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=provisioning)
+userAttrib(hdop051, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=provisioning)
+userAttrib(hdop052, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(hdop053, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(hdop054, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop055, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop056, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop057, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop058, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop059, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(hdop060, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(hdop061, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(hdop062, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(hdop063, position=helpdeskOperator, department=helpdesk, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(hdop064, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(hdop065, position=helpdeskOperator, department=helpdesk, provider=externalHelpdeskSupplier, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+
+# warehouseManager
+userAttrib(whmgr001, position=warehouseManager, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=south, managedStaff={whop001}, isCustomerSupport=False, group=none)
+userAttrib(whmgr002, position=warehouseManager, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={whop002 whop003 whop004}, isCustomerSupport=False, group=none)
+userAttrib(whmgr003, position=warehouseManager, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=south, managedStaff={whop005 whop006 whop007}, isCustomerSupport=True, group=companySupport)
+userAttrib(whmgr004, position=warehouseManager, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, managedStaff={whop008}, isCustomerSupport=False, group=none)
+userAttrib(whmgr005, position=warehouseManager, department=warehouse, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, managedStaff={whop009 whop010 whop011}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(whmgr006, position=warehouseManager, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, managedStaff={whop012}, isCustomerSupport=False, group=none)
+userAttrib(whmgr007, position=warehouseManager, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=north, managedStaff={whop013 whop014 whop015}, isCustomerSupport=False, group=none)
+userAttrib(whmgr008, position=warehouseManager, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, managedStaff={whop016 whop017 whop018}, isCustomerSupport=False, group=none)
+userAttrib(whmgr009, position=warehouseManager, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=south, managedStaff={whop019 whop020 whop021}, isCustomerSupport=False, group=none)
+userAttrib(whmgr010, position=warehouseManager, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=south, managedStaff={whop022 whop023 whop024}, isCustomerSupport=False, group=provisioning)
+userAttrib(whmgr011, position=warehouseManager, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=south, managedStaff={whop025 whop026}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(whmgr012, position=warehouseManager, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, managedStaff={whop027 whop028 whop029}, isCustomerSupport=False, group=none)
+userAttrib(whmgr013, position=warehouseManager, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, managedStaff={whop030 whop031 whop032}, isCustomerSupport=True, group=companySupport)
+userAttrib(whmgr014, position=warehouseManager, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, managedStaff={whop033 whop034}, isCustomerSupport=False, group=none)
+userAttrib(whmgr015, position=warehouseManager, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, managedStaff={whop035 whop036}, isCustomerSupport=False, group=provisioning)
+userAttrib(whmgr016, position=warehouseManager, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={whop037}, isCustomerSupport=False, group=none)
+userAttrib(whmgr017, position=warehouseManager, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, managedStaff={whop038}, isCustomerSupport=False, group=none)
+userAttrib(whmgr018, position=warehouseManager, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={whop039 whop040 whop041}, isCustomerSupport=False, group=none)
+userAttrib(whmgr019, position=warehouseManager, department=warehouse, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, managedStaff={whop042 whop043}, isCustomerSupport=False, group=provisioning)
+userAttrib(whmgr020, position=warehouseManager, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=south, managedStaff={whop044 whop045 whop046}, isCustomerSupport=False, group=none)
+userAttrib(whmgr021, position=warehouseManager, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, managedStaff={whop047 whop048 whop049}, isCustomerSupport=True, group=companySupport)
+userAttrib(whmgr022, position=warehouseManager, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={whop050 whop051}, isCustomerSupport=False, group=none)
+userAttrib(whmgr023, position=warehouseManager, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, managedStaff={whop052 whop053 whop054}, isCustomerSupport=False, group=none)
+userAttrib(whmgr024, position=warehouseManager, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, managedStaff={whop055 whop056 whop057}, isCustomerSupport=False, group=provisioning)
+userAttrib(whmgr025, position=warehouseManager, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=north, managedStaff={whop058 whop059 whop060}, isCustomerSupport=True, group=companySupport)
+userAttrib(whmgr026, position=warehouseManager, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=south, managedStaff={whop061}, isCustomerSupport=False, group=none)
+userAttrib(whmgr027, position=warehouseManager, department=warehouse, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, managedStaff={whop062 whop063 whop064}, isCustomerSupport=True, group=companySupport)
+userAttrib(whmgr028, position=warehouseManager, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=powerProtection, assignedRegion=south, managedStaff={whop065}, isCustomerSupport=False, group=none)
+userAttrib(whmgr029, position=warehouseManager, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=north, managedStaff={whop066 whop067 whop068}, isCustomerSupport=False, group=none)
+userAttrib(whmgr030, position=warehouseManager, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, managedStaff={whop069 whop070 whop071}, isCustomerSupport=False, group=none)
+
+# warehouseOperator
+userAttrib(whop001, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop002, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop003, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop004, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop005, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(whop006, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(whop007, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(whop008, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop009, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=True, group=residentialSupport)
+userAttrib(whop010, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=True, group=residentialSupport)
+userAttrib(whop011, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=True, group=residentialSupport)
+userAttrib(whop012, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop013, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop014, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop015, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop016, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop017, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop018, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop019, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop020, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop021, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop022, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=provisioning)
+userAttrib(whop023, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=provisioning)
+userAttrib(whop024, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=provisioning)
+userAttrib(whop025, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=residentialSupport)
+userAttrib(whop026, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=residentialSupport)
+userAttrib(whop027, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop028, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop029, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop030, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(whop031, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(whop032, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(whop033, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop034, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop035, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=provisioning)
+userAttrib(whop036, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=provisioning)
+userAttrib(whop037, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop038, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop039, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop040, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop041, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop042, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=provisioning)
+userAttrib(whop043, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=provisioning)
+userAttrib(whop044, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop045, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop046, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop047, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(whop048, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(whop049, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=True, group=companySupport)
+userAttrib(whop050, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop051, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop052, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop053, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop054, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop055, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=provisioning)
+userAttrib(whop056, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=provisioning)
+userAttrib(whop057, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=provisioning)
+userAttrib(whop058, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=north, isCustomerSupport=True, group=companySupport)
+userAttrib(whop059, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=north, isCustomerSupport=True, group=companySupport)
+userAttrib(whop060, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=telco, assignedRegion=north, isCustomerSupport=True, group=companySupport)
+userAttrib(whop061, position=warehouseOperator, department=warehouse, provider=subcontractor, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop062, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=True, group=companySupport)
+userAttrib(whop063, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=True, group=companySupport)
+userAttrib(whop064, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=telco, assignedRegion=north, isCustomerSupport=True, group=companySupport)
+userAttrib(whop065, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=powerProtection, assignedRegion=south, isCustomerSupport=False, group=none)
+userAttrib(whop066, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop067, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop068, position=warehouseOperator, department=warehouse, provider=externalWarehouseSupplier, assignedTenant=telco, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop069, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop070, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+userAttrib(whop071, position=warehouseOperator, department=warehouse, provider=eWorkforce, assignedTenant=powerProtection, assignedRegion=north, isCustomerSupport=False, group=none)
+
+# salesManager
+userAttrib(slmgr001, position=salesManager, department=sales, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=techSupport)
+userAttrib(slmgr002, position=salesManager, department=sales, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr003, position=salesManager, department=sales, provider=telco, assignedTenant=telco, assignedRegion=north, managedStaff={}, isCustomerSupport=True, group=companySupport)
+userAttrib(slmgr004, position=salesManager, department=sales, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=techSupport)
+userAttrib(slmgr005, position=salesManager, department=sales, provider=telco, assignedTenant=telco, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr006, position=salesManager, department=sales, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr007, position=salesManager, department=sales, provider=telco, assignedTenant=telco, assignedRegion=north, managedStaff={}, isCustomerSupport=True, group=companySupport)
+userAttrib(slmgr008, position=salesManager, department=sales, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr009, position=salesManager, department=sales, provider=telco, assignedTenant=telco, assignedRegion=north, managedStaff={}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(slmgr010, position=salesManager, department=sales, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr011, position=salesManager, department=sales, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr012, position=salesManager, department=sales, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr013, position=salesManager, department=sales, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(slmgr014, position=salesManager, department=sales, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr015, position=salesManager, department=sales, provider=telco, assignedTenant=telco, assignedRegion=north, managedStaff={}, isCustomerSupport=True, group=companySupport)
+userAttrib(slmgr016, position=salesManager, department=sales, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr017, position=salesManager, department=sales, provider=telco, assignedTenant=telco, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr018, position=salesManager, department=sales, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr019, position=salesManager, department=sales, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr020, position=salesManager, department=sales, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr021, position=salesManager, department=sales, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=provisioning)
+userAttrib(slmgr022, position=salesManager, department=sales, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr023, position=salesManager, department=sales, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=techSupport)
+userAttrib(slmgr024, position=salesManager, department=sales, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=techSupport)
+userAttrib(slmgr025, position=salesManager, department=sales, provider=telco, assignedTenant=telco, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr026, position=salesManager, department=sales, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr027, position=salesManager, department=sales, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=True, group=companySupport)
+userAttrib(slmgr028, position=salesManager, department=sales, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=True, group=companySupport)
+userAttrib(slmgr029, position=salesManager, department=sales, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(slmgr030, position=salesManager, department=sales, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=True, group=companySupport)
+
+# maintenanceManager
+userAttrib(mtmgr001, position=maintenanceManager, department=maintenance, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(mtmgr002, position=maintenanceManager, department=maintenance, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(mtmgr003, position=maintenanceManager, department=maintenance, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(mtmgr004, position=maintenanceManager, department=maintenance, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(mtmgr005, position=maintenanceManager, department=maintenance, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(mtmgr006, position=maintenanceManager, department=maintenance, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(mtmgr007, position=maintenanceManager, department=maintenance, provider=telco, assignedTenant=telco, assignedRegion=north, managedStaff={}, isCustomerSupport=True, group=companySupport)
+userAttrib(mtmgr008, position=maintenanceManager, department=maintenance, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=techSupport)
+userAttrib(mtmgr009, position=maintenanceManager, department=maintenance, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(mtmgr010, position=maintenanceManager, department=maintenance, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=True, group=companySupport)
+userAttrib(mtmgr011, position=maintenanceManager, department=maintenance, provider=telco, assignedTenant=telco, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(mtmgr012, position=maintenanceManager, department=maintenance, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(mtmgr013, position=maintenanceManager, department=maintenance, provider=telco, assignedTenant=telco, assignedRegion=north, managedStaff={}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(mtmgr014, position=maintenanceManager, department=maintenance, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(mtmgr015, position=maintenanceManager, department=maintenance, provider=telco, assignedTenant=telco, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(mtmgr016, position=maintenanceManager, department=maintenance, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=techSupport)
+userAttrib(mtmgr017, position=maintenanceManager, department=maintenance, provider=telco, assignedTenant=telco, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=provisioning)
+userAttrib(mtmgr018, position=maintenanceManager, department=maintenance, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(mtmgr019, position=maintenanceManager, department=maintenance, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(mtmgr020, position=maintenanceManager, department=maintenance, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=techSupport)
+userAttrib(mtmgr021, position=maintenanceManager, department=maintenance, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(mtmgr022, position=maintenanceManager, department=maintenance, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(mtmgr023, position=maintenanceManager, department=maintenance, provider=telco, assignedTenant=telco, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(mtmgr024, position=maintenanceManager, department=maintenance, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=techSupport)
+userAttrib(mtmgr025, position=maintenanceManager, department=maintenance, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=True, group=residentialSupport)
+userAttrib(mtmgr026, position=maintenanceManager, department=maintenance, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=north, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(mtmgr027, position=maintenanceManager, department=maintenance, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=True, group=companySupport)
+userAttrib(mtmgr028, position=maintenanceManager, department=maintenance, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=south, managedStaff={}, isCustomerSupport=True, group=companySupport)
+userAttrib(mtmgr029, position=maintenanceManager, department=maintenance, provider=telco, assignedTenant=telco, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=none)
+userAttrib(mtmgr030, position=maintenanceManager, department=maintenance, provider=powerProtection, assignedTenant=powerProtection, assignedRegion=south, managedStaff={}, isCustomerSupport=False, group=none)
+
+#------------------------------------------------------------
+# Resource Attribute Data
+#------------------------------------------------------------
+
+# Contracts
+resourceAttrib(contract001, type=contract, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active)
+resourceAttrib(contract002, type=contract, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active)
+resourceAttrib(contract003, type=contract, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive)
+resourceAttrib(contract004, type=contract, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active)
+resourceAttrib(contract005, type=contract, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active)
+resourceAttrib(contract006, type=contract, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive)
+resourceAttrib(contract007, type=contract, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive)
+resourceAttrib(contract008, type=contract, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active)
+resourceAttrib(contract009, type=contract, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active)
+resourceAttrib(contract010, type=contract, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive)
+
+# Work Orders
+resourceAttrib(workorder001, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, createdBy=hdop018, assignedTechnician=tech058, requiredCertifications={telcoCertifiedTechnician}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder002, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, createdBy=hdop002, assignedTechnician=tech012, requiredCertifications={telcoCertifiedTechnician}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder003, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, createdBy=hdop063, assignedTechnician=tech030, requiredCertifications={telcoCertifiedTechnician}, recurrence=False, isAppointment=False)
+resourceAttrib(workorder004, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, createdBy=hdop014, assignedTechnician=tech002, requiredCertifications={telcoCertifiedTechnician}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder005, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, createdBy=hdop023, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder006, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, createdBy=hdop043, assignedTechnician=tech001, requiredCertifications={telcoCertifiedTechnician}, recurrence=False, isAppointment=True)
+resourceAttrib(workorder007, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, createdBy=hdop034, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician}, recurrence=False, isAppointment=False)
+resourceAttrib(workorder008, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, createdBy=hdop022, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder009, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, createdBy=hdop057, assignedTechnician=tech047, requiredCertifications={telcoCertifiedTechnician}, recurrence=False, isAppointment=False)
+resourceAttrib(workorder010, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, createdBy=hdop030, assignedTechnician=tech023, requiredCertifications={telcoCertifiedTechnician}, recurrence=False, isAppointment=False)
+resourceAttrib(workorder011, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, createdBy=hdop019, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder012, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, createdBy=hdop047, assignedTechnician=tech052, requiredCertifications={telcoCertifiedTechnician}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder013, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, createdBy=hdop039, assignedTechnician=tech052, requiredCertifications={telcoCertifiedTechnician}, recurrence=False, isAppointment=False)
+resourceAttrib(workorder014, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, createdBy=hdop014, assignedTechnician=tech043, requiredCertifications={telcoCertifiedTechnician}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder015, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, createdBy=hdop012, assignedTechnician=tech005, requiredCertifications={telcoCertifiedTechnician}, recurrence=False, isAppointment=False)
+resourceAttrib(workorder016, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, createdBy=hdop022, assignedTechnician=tech001, requiredCertifications={telcoCertifiedTechnician}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder017, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, createdBy=hdop012, assignedTechnician=tech010, requiredCertifications={telcoCertifiedTechnician}, recurrence=False, isAppointment=False)
+resourceAttrib(workorder018, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, createdBy=hdop053, assignedTechnician=tech015, requiredCertifications={telcoCertifiedTechnician}, recurrence=False, isAppointment=True)
+resourceAttrib(workorder019, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, createdBy=hdop044, assignedTechnician=tech063, requiredCertifications={telcoCertifiedTechnician}, recurrence=False, isAppointment=False)
+resourceAttrib(workorder020, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, createdBy=hdop063, assignedTechnician=tech056, requiredCertifications={}, recurrence=False, isAppointment=False)
+resourceAttrib(workorder021, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, createdBy=hdop047, assignedTechnician=tech015, requiredCertifications={telcoCertifiedTechnician}, recurrence=False, isAppointment=False)
+resourceAttrib(workorder022, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, createdBy=hdop035, assignedTechnician=tech011, requiredCertifications={}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder023, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, createdBy=hdop022, assignedTechnician=tech061, requiredCertifications={telcoCertifiedTechnician}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder024, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, createdBy=hdop053, assignedTechnician=tech011, requiredCertifications={}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder025, type=workOrder, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, createdBy=hdop018, assignedTechnician=tech056, requiredCertifications={}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder026, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, createdBy=hdop003, assignedTechnician=tech007, requiredCertifications={powerProtectionSpecialist}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder027, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, createdBy=hdop038, assignedTechnician=tech014, requiredCertifications={}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder028, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, createdBy=hdop056, assignedTechnician=tech066, requiredCertifications={powerProtectionSpecialist}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder029, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, createdBy=hdop017, assignedTechnician=tech021, requiredCertifications={}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder030, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, createdBy=hdop045, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder031, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, createdBy=hdop056, assignedTechnician=tech031, requiredCertifications={}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder032, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, createdBy=hdop038, assignedTechnician=tech032, requiredCertifications={powerProtectionSpecialist}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder033, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, createdBy=hdop016, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder034, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, createdBy=hdop003, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist}, recurrence=False, isAppointment=False)
+resourceAttrib(workorder035, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, createdBy=hdop060, assignedTechnician=tech021, requiredCertifications={}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder036, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, createdBy=hdop025, assignedTechnician=tech041, requiredCertifications={powerProtectionSpecialist}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder037, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, createdBy=hdop046, assignedTechnician=tech026, requiredCertifications={}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder038, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, createdBy=hdop056, assignedTechnician=tech024, requiredCertifications={}, recurrence=False, isAppointment=False)
+resourceAttrib(workorder039, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, createdBy=hdop031, assignedTechnician=tech024, requiredCertifications={}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder040, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, createdBy=hdop017, assignedTechnician=tech048, requiredCertifications={powerProtectionSpecialist}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder041, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract009, createdBy=hdop056, assignedTechnician=tech045, requiredCertifications={powerProtectionSpecialist}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder042, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract009, createdBy=hdop055, assignedTechnician=tech036, requiredCertifications={}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder043, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract009, createdBy=hdop009, assignedTechnician=tech060, requiredCertifications={}, recurrence=False, isAppointment=False)
+resourceAttrib(workorder044, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract009, createdBy=hdop056, assignedTechnician=tech059, requiredCertifications={powerProtectionSpecialist}, recurrence=False, isAppointment=False)
+resourceAttrib(workorder045, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract009, createdBy=hdop042, assignedTechnician=tech009, requiredCertifications={powerProtectionSpecialist}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder046, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, createdBy=hdop049, assignedTechnician=tech049, requiredCertifications={powerProtectionSpecialist}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder047, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, createdBy=hdop017, assignedTechnician=tech046, requiredCertifications={}, recurrence=False, isAppointment=False)
+resourceAttrib(workorder048, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, createdBy=hdop008, assignedTechnician=tech046, requiredCertifications={}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder049, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, createdBy=hdop033, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist}, recurrence=True, isAppointment=False)
+resourceAttrib(workorder050, type=workOrder, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, createdBy=hdop008, assignedTechnician=tech026, requiredCertifications={}, recurrence=True, isAppointment=False)
+
+# Tasks
+resourceAttrib(task001, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder001, assignedTechnician=tech058, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task002, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder001, assignedTechnician=tech058, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task003, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder001, assignedTechnician=tech058, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task004, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder001, assignedTechnician=tech058, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task005, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder002, assignedTechnician=tech012, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task006, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder002, assignedTechnician=tech012, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task007, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder002, assignedTechnician=tech012, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task008, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder002, assignedTechnician=tech012, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task009, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder003, assignedTechnician=tech030, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task010, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder003, assignedTechnician=tech030, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task011, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder003, assignedTechnician=tech030, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task012, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder003, assignedTechnician=tech030, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task013, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder004, assignedTechnician=tech002, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task014, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder004, assignedTechnician=tech002, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task015, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder004, assignedTechnician=tech002, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task016, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder005, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task017, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder005, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task018, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder005, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task019, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract001, associatedWorkOrder=workorder005, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task020, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, associatedWorkOrder=workorder006, assignedTechnician=tech001, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task021, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, associatedWorkOrder=workorder006, assignedTechnician=tech001, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task022, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, associatedWorkOrder=workorder006, assignedTechnician=tech001, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task023, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, associatedWorkOrder=workorder007, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task024, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, associatedWorkOrder=workorder007, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task025, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, associatedWorkOrder=workorder008, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task026, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, associatedWorkOrder=workorder008, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task027, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, associatedWorkOrder=workorder008, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task028, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, associatedWorkOrder=workorder008, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task029, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, associatedWorkOrder=workorder009, assignedTechnician=tech047, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task030, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, associatedWorkOrder=workorder009, assignedTechnician=tech047, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task031, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, associatedWorkOrder=workorder009, assignedTechnician=tech047, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task032, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, associatedWorkOrder=workorder009, assignedTechnician=tech047, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task033, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, associatedWorkOrder=workorder010, assignedTechnician=tech023, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task034, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, associatedWorkOrder=workorder010, assignedTechnician=tech023, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task035, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract002, associatedWorkOrder=workorder010, assignedTechnician=tech023, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task036, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, associatedWorkOrder=workorder011, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task037, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, associatedWorkOrder=workorder011, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task038, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, associatedWorkOrder=workorder011, assignedTechnician=tech038, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task039, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, associatedWorkOrder=workorder012, assignedTechnician=tech052, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task040, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, associatedWorkOrder=workorder012, assignedTechnician=tech052, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task041, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, associatedWorkOrder=workorder012, assignedTechnician=tech052, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task042, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, associatedWorkOrder=workorder013, assignedTechnician=tech052, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task043, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, associatedWorkOrder=workorder013, assignedTechnician=tech052, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task044, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, associatedWorkOrder=workorder013, assignedTechnician=tech052, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task045, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, associatedWorkOrder=workorder013, assignedTechnician=tech052, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task046, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, associatedWorkOrder=workorder014, assignedTechnician=tech043, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task047, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, associatedWorkOrder=workorder014, assignedTechnician=tech043, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task048, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, associatedWorkOrder=workorder014, assignedTechnician=tech043, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task049, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, associatedWorkOrder=workorder014, assignedTechnician=tech043, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task050, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, associatedWorkOrder=workorder015, assignedTechnician=tech005, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task051, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract003, associatedWorkOrder=workorder015, assignedTechnician=tech005, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task052, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, associatedWorkOrder=workorder016, assignedTechnician=tech001, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task053, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, associatedWorkOrder=workorder016, assignedTechnician=tech001, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task054, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, associatedWorkOrder=workorder017, assignedTechnician=tech010, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task055, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, associatedWorkOrder=workorder017, assignedTechnician=tech010, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task056, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, associatedWorkOrder=workorder017, assignedTechnician=tech010, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task057, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, associatedWorkOrder=workorder017, assignedTechnician=tech010, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task058, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, associatedWorkOrder=workorder018, assignedTechnician=tech015, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task059, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, associatedWorkOrder=workorder018, assignedTechnician=tech015, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task060, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, associatedWorkOrder=workorder018, assignedTechnician=tech015, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task061, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, associatedWorkOrder=workorder018, assignedTechnician=tech015, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task062, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, associatedWorkOrder=workorder019, assignedTechnician=tech063, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task063, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, associatedWorkOrder=workorder019, assignedTechnician=tech063, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task064, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, associatedWorkOrder=workorder019, assignedTechnician=tech063, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task065, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, associatedWorkOrder=workorder020, assignedTechnician=tech056, requiredCertifications={})
+resourceAttrib(task066, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract004, associatedWorkOrder=workorder020, assignedTechnician=tech056, requiredCertifications={})
+resourceAttrib(task067, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder021, assignedTechnician=tech015, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task068, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder021, assignedTechnician=tech015, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task069, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder021, assignedTechnician=tech015, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task070, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder022, assignedTechnician=tech011, requiredCertifications={})
+resourceAttrib(task071, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder022, assignedTechnician=tech011, requiredCertifications={})
+resourceAttrib(task072, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder022, assignedTechnician=tech011, requiredCertifications={})
+resourceAttrib(task073, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder022, assignedTechnician=tech011, requiredCertifications={})
+resourceAttrib(task074, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder023, assignedTechnician=tech061, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task075, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder023, assignedTechnician=tech061, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task076, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder023, assignedTechnician=tech061, requiredCertifications={telcoCertifiedTechnician})
+resourceAttrib(task077, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder024, assignedTechnician=tech011, requiredCertifications={})
+resourceAttrib(task078, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder024, assignedTechnician=tech011, requiredCertifications={})
+resourceAttrib(task079, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder024, assignedTechnician=tech011, requiredCertifications={})
+resourceAttrib(task080, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder024, assignedTechnician=tech011, requiredCertifications={})
+resourceAttrib(task081, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder025, assignedTechnician=tech056, requiredCertifications={})
+resourceAttrib(task082, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder025, assignedTechnician=tech056, requiredCertifications={})
+resourceAttrib(task083, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder025, assignedTechnician=tech056, requiredCertifications={})
+resourceAttrib(task084, type=task, department=workforce, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract005, associatedWorkOrder=workorder025, assignedTechnician=tech056, requiredCertifications={})
+resourceAttrib(task085, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, associatedWorkOrder=workorder026, assignedTechnician=tech007, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task086, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, associatedWorkOrder=workorder026, assignedTechnician=tech007, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task087, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, associatedWorkOrder=workorder027, assignedTechnician=tech014, requiredCertifications={})
+resourceAttrib(task088, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, associatedWorkOrder=workorder027, assignedTechnician=tech014, requiredCertifications={})
+resourceAttrib(task089, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, associatedWorkOrder=workorder028, assignedTechnician=tech066, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task090, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, associatedWorkOrder=workorder028, assignedTechnician=tech066, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task091, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, associatedWorkOrder=workorder028, assignedTechnician=tech066, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task092, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, associatedWorkOrder=workorder029, assignedTechnician=tech021, requiredCertifications={})
+resourceAttrib(task093, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, associatedWorkOrder=workorder029, assignedTechnician=tech021, requiredCertifications={})
+resourceAttrib(task094, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, associatedWorkOrder=workorder030, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task095, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, associatedWorkOrder=workorder030, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task096, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, associatedContract=contract006, associatedWorkOrder=workorder030, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task097, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, associatedWorkOrder=workorder031, assignedTechnician=tech031, requiredCertifications={})
+resourceAttrib(task098, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, associatedWorkOrder=workorder031, assignedTechnician=tech031, requiredCertifications={})
+resourceAttrib(task099, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, associatedWorkOrder=workorder032, assignedTechnician=tech032, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task100, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, associatedWorkOrder=workorder032, assignedTechnician=tech032, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task101, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, associatedWorkOrder=workorder033, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task102, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, associatedWorkOrder=workorder033, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task103, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, associatedWorkOrder=workorder033, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task104, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, associatedWorkOrder=workorder034, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task105, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, associatedWorkOrder=workorder034, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task106, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, associatedWorkOrder=workorder034, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task107, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, associatedWorkOrder=workorder034, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task108, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, associatedWorkOrder=workorder035, assignedTechnician=tech021, requiredCertifications={})
+resourceAttrib(task109, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract007, associatedWorkOrder=workorder035, assignedTechnician=tech021, requiredCertifications={})
+resourceAttrib(task110, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, associatedWorkOrder=workorder036, assignedTechnician=tech041, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task111, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, associatedWorkOrder=workorder036, assignedTechnician=tech041, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task112, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, associatedWorkOrder=workorder036, assignedTechnician=tech041, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task113, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, associatedWorkOrder=workorder036, assignedTechnician=tech041, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task114, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, associatedWorkOrder=workorder037, assignedTechnician=tech026, requiredCertifications={})
+resourceAttrib(task115, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, associatedWorkOrder=workorder037, assignedTechnician=tech026, requiredCertifications={})
+resourceAttrib(task116, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, associatedWorkOrder=workorder037, assignedTechnician=tech026, requiredCertifications={})
+resourceAttrib(task117, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, associatedWorkOrder=workorder038, assignedTechnician=tech024, requiredCertifications={})
+resourceAttrib(task118, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, associatedWorkOrder=workorder038, assignedTechnician=tech024, requiredCertifications={})
+resourceAttrib(task119, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, associatedWorkOrder=workorder038, assignedTechnician=tech024, requiredCertifications={})
+resourceAttrib(task120, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, associatedWorkOrder=workorder039, assignedTechnician=tech024, requiredCertifications={})
+resourceAttrib(task121, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, associatedWorkOrder=workorder039, assignedTechnician=tech024, requiredCertifications={})
+resourceAttrib(task122, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, associatedWorkOrder=workorder040, assignedTechnician=tech048, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task123, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, associatedContract=contract008, associatedWorkOrder=workorder040, assignedTechnician=tech048, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task124, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract009, associatedWorkOrder=workorder041, assignedTechnician=tech045, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task125, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract009, associatedWorkOrder=workorder041, assignedTechnician=tech045, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task126, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract009, associatedWorkOrder=workorder042, assignedTechnician=tech036, requiredCertifications={})
+resourceAttrib(task127, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract009, associatedWorkOrder=workorder042, assignedTechnician=tech036, requiredCertifications={})
+resourceAttrib(task128, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract009, associatedWorkOrder=workorder043, assignedTechnician=tech060, requiredCertifications={})
+resourceAttrib(task129, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract009, associatedWorkOrder=workorder043, assignedTechnician=tech060, requiredCertifications={})
+resourceAttrib(task130, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract009, associatedWorkOrder=workorder043, assignedTechnician=tech060, requiredCertifications={})
+resourceAttrib(task131, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract009, associatedWorkOrder=workorder044, assignedTechnician=tech059, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task132, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract009, associatedWorkOrder=workorder044, assignedTechnician=tech059, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task133, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract009, associatedWorkOrder=workorder045, assignedTechnician=tech009, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task134, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, associatedContract=contract009, associatedWorkOrder=workorder045, assignedTechnician=tech009, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task135, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, associatedWorkOrder=workorder046, assignedTechnician=tech049, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task136, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, associatedWorkOrder=workorder046, assignedTechnician=tech049, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task137, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, associatedWorkOrder=workorder047, assignedTechnician=tech046, requiredCertifications={})
+resourceAttrib(task138, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, associatedWorkOrder=workorder047, assignedTechnician=tech046, requiredCertifications={})
+resourceAttrib(task139, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, associatedWorkOrder=workorder047, assignedTechnician=tech046, requiredCertifications={})
+resourceAttrib(task140, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, associatedWorkOrder=workorder047, assignedTechnician=tech046, requiredCertifications={})
+resourceAttrib(task141, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, associatedWorkOrder=workorder048, assignedTechnician=tech046, requiredCertifications={})
+resourceAttrib(task142, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, associatedWorkOrder=workorder048, assignedTechnician=tech046, requiredCertifications={})
+resourceAttrib(task143, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, associatedWorkOrder=workorder049, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task144, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, associatedWorkOrder=workorder049, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task145, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, associatedWorkOrder=workorder049, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task146, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, associatedWorkOrder=workorder049, assignedTechnician=tech064, requiredCertifications={powerProtectionSpecialist})
+resourceAttrib(task147, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, associatedWorkOrder=workorder050, assignedTechnician=tech026, requiredCertifications={})
+resourceAttrib(task148, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, associatedWorkOrder=workorder050, assignedTechnician=tech026, requiredCertifications={})
+resourceAttrib(task149, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, associatedWorkOrder=workorder050, assignedTechnician=tech026, requiredCertifications={})
+resourceAttrib(task150, type=task, department=workforce, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, associatedContract=contract010, associatedWorkOrder=workorder050, assignedTechnician=tech026, requiredCertifications={})
+
+# Resource Requests
+resourceAttrib(resourcereq001, type=resourceRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, assignedEmployee=whop025, isComplete=False, assignedTechnician=tech004)
+resourceAttrib(resourcereq002, type=resourceRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=inactive, assignedEmployee=whop054, isComplete=True, assignedTechnician=tech035)
+resourceAttrib(resourcereq003, type=resourceRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, assignedEmployee=whop054, isComplete=False, assignedTechnician=tech056)
+resourceAttrib(resourcereq004, type=resourceRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, assignedEmployee=whop059, isComplete=True, assignedTechnician=tech040)
+resourceAttrib(resourcereq005, type=resourceRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=inactive, assignedEmployee=whop026, isComplete=True, assignedTechnician=tech005)
+resourceAttrib(resourcereq006, type=resourceRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=inactive, assignedEmployee=whop060, isComplete=False, assignedTechnician=tech047)
+resourceAttrib(resourcereq007, type=resourceRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=inactive, assignedEmployee=whop060, isComplete=False, assignedTechnician=tech063)
+resourceAttrib(resourcereq008, type=resourceRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=inactive, assignedEmployee=whop010, isComplete=False, assignedTechnician=tech056)
+resourceAttrib(resourcereq009, type=resourceRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, assignedEmployee=whop026, isComplete=False, assignedTechnician=tech043)
+resourceAttrib(resourcereq010, type=resourceRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, assignedEmployee=whop049, isComplete=True, assignedTechnician=tech038)
+resourceAttrib(resourcereq011, type=resourceRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, assignedEmployee=whop034, isComplete=False, assignedTechnician=tech032)
+resourceAttrib(resourcereq012, type=resourceRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, assignedEmployee=whop027, isComplete=True, assignedTechnician=tech033)
+resourceAttrib(resourcereq013, type=resourceRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, assignedEmployee=whop023, isComplete=True, assignedTechnician=tech018)
+resourceAttrib(resourcereq014, type=resourceRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, assignedEmployee=whop051, isComplete=False, assignedTechnician=tech020)
+resourceAttrib(resourcereq015, type=resourceRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, assignedEmployee=whop069, isComplete=True, assignedTechnician=tech025)
+resourceAttrib(resourcereq016, type=resourceRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, assignedEmployee=whop034, isComplete=True, assignedTechnician=tech041)
+resourceAttrib(resourcereq017, type=resourceRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, assignedEmployee=whop041, isComplete=True, assignedTechnician=tech003)
+resourceAttrib(resourcereq018, type=resourceRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, assignedEmployee=whop037, isComplete=True, assignedTechnician=tech055)
+resourceAttrib(resourcereq019, type=resourceRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, assignedEmployee=whop029, isComplete=True, assignedTechnician=tech053)
+resourceAttrib(resourcereq020, type=resourceRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, assignedEmployee=whop016, isComplete=True, assignedTechnician=tech008)
+
+# Stock Refill Requests
+resourceAttrib(stockrefill001, type=stockRefillRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, assignedEmployee=whop052, isComplete=False)
+resourceAttrib(stockrefill002, type=stockRefillRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, assignedEmployee=whop005, isComplete=True)
+resourceAttrib(stockrefill003, type=stockRefillRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=inactive, assignedEmployee=whop030, isComplete=True)
+resourceAttrib(stockrefill004, type=stockRefillRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, assignedEmployee=whop011, isComplete=False)
+resourceAttrib(stockrefill005, type=stockRefillRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, assignedEmployee=whop060, isComplete=False)
+resourceAttrib(stockrefill006, type=stockRefillRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, assignedEmployee=whop067, isComplete=True)
+resourceAttrib(stockrefill007, type=stockRefillRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=active, assignedEmployee=whop064, isComplete=False)
+resourceAttrib(stockrefill008, type=stockRefillRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, assignedEmployee=whop060, isComplete=True)
+resourceAttrib(stockrefill009, type=stockRefillRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=south, contractStatus=inactive, assignedEmployee=whop066, isComplete=True)
+resourceAttrib(stockrefill010, type=stockRefillRequest, department=warehouse, tenant=telco, tenantType=primary, resourceRegion=north, contractStatus=active, assignedEmployee=whop035, isComplete=False)
+resourceAttrib(stockrefill011, type=stockRefillRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, assignedEmployee=whop041, isComplete=False)
+resourceAttrib(stockrefill012, type=stockRefillRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=active, assignedEmployee=whop002, isComplete=True)
+resourceAttrib(stockrefill013, type=stockRefillRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, assignedEmployee=whop027, isComplete=False)
+resourceAttrib(stockrefill014, type=stockRefillRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, assignedEmployee=whop017, isComplete=True)
+resourceAttrib(stockrefill015, type=stockRefillRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, assignedEmployee=whop041, isComplete=True)
+resourceAttrib(stockrefill016, type=stockRefillRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, assignedEmployee=whop057, isComplete=False)
+resourceAttrib(stockrefill017, type=stockRefillRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, assignedEmployee=whop041, isComplete=True)
+resourceAttrib(stockrefill018, type=stockRefillRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=inactive, assignedEmployee=whop056, isComplete=True)
+resourceAttrib(stockrefill019, type=stockRefillRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=north, contractStatus=inactive, assignedEmployee=whop027, isComplete=False)
+resourceAttrib(stockrefill020, type=stockRefillRequest, department=warehouse, tenant=powerProtection, tenantType=primary, resourceRegion=south, contractStatus=active, assignedEmployee=whop046, isComplete=True)
+
+#------------------------------------------------------------
+# ABAC Rules
+#------------------------------------------------------------
+
+#------------------------------
+# eWorkforce 
+#------------------------------
+
+# eWorkforce Helpdesk
+#-----
+# 1. Only helpdesk operators can create work orders that apply to active contracts of a Primary Tenant for which he/she is assigned responsible.
+rule(provider [ {eWorkforce}, position [ {helpdeskOperator}; type [ {contract}, contractStatus [ {active}, tenantType [ {primary}; {createOneTimeWorkOrder createRecurrentWorkOrder}; assignedTenant = tenant)
+
+# 2. Helpdesk operators can only modify or remove work orders that apply to active contracts of a Primary Tenant for which he/she is assigned responsible.
+rule(provider [ {eWorkforce}, position [ {helpdeskOperator}; type [ {workOrder}, contractStatus [ {active}, tenantType [ {primary}; {modify delete}; assignedTenant = tenant)
+
+
+# Application Admins
+#-----
+# 3. Application admins can create appointments for all tenants of eWorkforce.
+rule(provider [ {eWorkforce}, position [ {applicationAdmin}; type [ {contract}; {createAppointment}; )
+
+# 4. Application admins can modify and delete appointments for all tenants of eWorkforce.
+rule(provider [ {eWorkforce}, position [ {applicationAdmin}; type [ {workOrder}, isAppointment [ {True}; {modify delete}; )
+
+
+# Internal Workforce
+#-----
+# 5. Only employees of the workforce team can access tasks.
+rule(provider [ {eWorkforce}, department [ {workforce}; type [ {task}; {view}; )
+
+# 6. Employees can only access tasks of customers which relate to their department.
+# Employees can only access tasks of active projects/contracts.
+rule(provider [ {eWorkforce}; type [ {task}, contractStatus [ {active}; {view}; department = department)
+
+# 7. Technicians can only view and complete tasks that are assigned to them.
+rule(provider [ {eWorkforce}, position [ {technician}; type [ {task}; {view complete}; uid = assignedTechnician)
+
+# 8. Workforce Managers can view and complete all tasks assigned to a Technician for which they are assigned responsible.
+rule(provider [ {eWorkforce}, position [ {workforceManager}; type [ {task}; {view complete}; managedStaff ] assignedTechnician)
+
+
+# Internal Warehouse
+#-----
+# 9. All warehouse managers can mark a stock refill request sent to the warehouse as completed.
+rule(provider [ {eWorkforce}, position [ {warehouseManager}; type [ {stockRefillRequest}; {markComplete}; )
+
+# 10. A warehouse operator can only view or complete resource requests assigned to him/her.
+rule(provider [ {eWorkforce}, position [ {warehouseOperator}; type [ {resourceRequest}; {view complete}; uid = assignedEmployee)
+
+# 11. A warehouse manager can view and complete any resource request assigned to any warehouse operator of the warehouse.
+rule(provider [ {eWorkforce}, position [ {warehouseManager}; type [ {resourceRequest}; {view complete}; managedStaff ] assignedEmployee)
+
+
+#------------------------------
+# PowerProtection
+#------------------------------
+
+# PowerProtection Sales Managers
+#-----
+# 12. All sales managers can create work orders.
+# Sales managers can only create one-time work orders.
+rule(provider [ {powerProtection}, position [ {salesManager}; type [ {contract}, tenant [ {powerProtection}; {createOneTimeWorkOrder}; )
+
+# 13. All sales managers can view all work orders.
+rule(provider [ {powerProtection}, position [ {salesManager}; type [ {workOrder}, tenant [ {powerProtection}; {view}; )
+
+
+# PowerProtection Maintenance Managers
+#-----
+# 14. All maintenance managers can create work orders.
+# Maintenance managers can create one-time and recurrent work orders.
+rule(provider [ {powerProtection}, position [ {maintenanceManager}; type [ {contract}, tenant [ {powerProtection}; {createOneTimeWorkOrder createRecurrentWorkOrder}; )
+
+
+# PowerProtection Stock Refill Notifications
+#-----
+# 15. Only members of the Provisioning group can receive stock refill notifications.
+rule(provider [ {powerProtection}, group [ {provisioning}; type [ {stockRefillRequest}, tenant [ {powerProtection}; {receive}; )
+
+
+#------------------------------
+# TelCo
+#------------------------------
+
+# TelCo Work Orders
+#-----
+# 16. Every employee of TelCo which is member of Customer Support can use the application to create work orders.
+rule(provider [ {telco}, isCustomerSupport [ {True}; type [ {contract}, tenant [ {telco}; {createOneTimeWorkOrder}; )
+
+# 17. Members of Customer Support which are part of the Company Support group can only send one-time work orders. They can also create recurring work orders if they are Sales Managers or Maintenance Managers.
+rule(provider [ {telco}, isCustomerSupport [ {True}, group [ {companySupport}, position [ {salesManager maintenanceManager}; type [ {contract}, tenant [ {telco}; {createOneTimeWorkOrder createRecurrentWorkOrder}; )
+
+# 18. Only Members of Customer Support which are part of the Residential Support group and are Maintenance Managers can create recurring work orders, the rest can only create one-time work orders.
+rule(provider [ {telco}, position [ {maintenanceManager}, isCustomerSupport [ {True}, group [ {residentialSupport}; type [ {contract}, tenant [ {telco}; {createRecurrentWorkOrder}; )
+
+
+# TelCo Stock Refill Notifications
+#-----
+# 19. Only members of Technician Support can receive stock refill notifications.
+# All members of Technician Support can receive stock refill notifications.
+rule(provider [ {telco}, group [ {techSupport}; type [ {stockRefillRequest}, tenant [ {telco}; {receive}; )
+
+
+#------------------------------
+# Helpdesk Supplier
+#------------------------------
+
+# Helpdesk Supplier Helpdesk Operators
+#-----
+# 20. All Helpdesk Operators can create a new work order.
+rule(provider [ {externalHelpdeskSupplier}, position [ {helpdeskOperator}; type [ {contract}; {createOneTimeWorkOrder createRecurrentWorkOrder}; )
+
+# 21. All Helpdesk Operators can modify a new work order.
+rule(provider [ {externalHelpdeskSupplier}, position [ {helpdeskOperator}; type [ {workOrder}; {modify}; )
+
+
+# Helpdesk Supplier Helpdesk Managers
+#-----
+# 22. Helpdesk Managers can only view work orders.
+# Helpdesk Managers can only view work orders created by Helpdesk Operators which are members of the team they are responsible for.
+rule(provider [ {externalHelpdeskSupplier}, position [ {helpdeskManager}; type [ {workOrder}; {view}; managedStaff ] createdBy)
+
+
+#------------------------------
+# Workforce Supplier
+#------------------------------
+
+# Workforce Supplier General
+#-----
+# 23. Only Technicians or Workforce Managers can access tasks.
+# Employees of a Workforce Supplier can only access tasks of customers which relate to their department
+# Employees of a Workforce Supplier can only access tasks of active projects/contracts.
+rule(provider [ {externalWorkforceSupplier}, position [ {workforceManager technician}; type [ {task}, contractStatus [ {active}; {view}; department = department)
+
+
+# Workforce Supplier Technicians
+#-----
+# 24. Technicians can only view and complete tasks that are assigned to them.
+rule(provider [ {externalWorkforceSupplier}, position [ {technician}; type [ {task}; {view complete}; uid = assignedTechnician)
+
+
+# Workforce Supplier Workforce Managers
+#-----
+# 25. Workforce Managers can view and complete all tasks assigned to a Technician for which they are assigned responsible.
+rule(provider [ {externalWorkforceSupplier}, position [ {workforceManager}; type [ {task}; {view complete}; managedStaff ] assignedTechnician)
+
+
+#------------------------------
+# Subcontractor
+#------------------------------
+
+# Subcontractor General
+#-----
+# 26. Only Technicians or Workforce Managers can access tasks.
+# Employees of a Workforce Supplier can only access tasks of customers which relate to their department.
+# Employees of a Workforce Supplier can only access tasks of active projects/contracts.
+rule(provider [ {subcontractor}, position [ {workforceManager technician}; type [ {task}, contractStatus [ {active}; {view}; department = department)
+
+
+# Subcontractor Technicians
+#-----
+# 27. Technicians can only view and complete tasks that are assigned to them.
+rule(provider [ {subcontractor}, position [ {technician}; type [ {task}; {view complete}; uid = assignedTechnician)
+
+
+# Subcontractor Workforce Managers
+#-----
+# 28. Workforce Managers can view and complete all tasks assigned to a Technician in their team.
+rule(provider [ {subcontractor}, position [ {workforceManager}; type [ {task}; {view complete}; managedStaff ] assignedTechnician)
+
