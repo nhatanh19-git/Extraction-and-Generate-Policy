@@ -1,0 +1,161 @@
+# =============================================================================
+# ABAC Attribute Schema Vocabulary
+# Auto-generated from ABAC-Lab datasets:
+#   - edocument, healthcare, project-management, university, workforce
+# Defines the canonical attributes allowed in the system for entity mapping.
+# =============================================================================
+
+# ---- Domain registry ----
+domains:
+  - edocument
+  - healthcare
+  - project-management
+  - university
+  - workforce
+
+# ---- Subject (User) Attributes ----
+# Extracted from userAttrib() declarations across all 5 .abac files.
+subject_attributes:
+  # --- Identity & Role ---
+  - role                   # edocument (employee, customer)
+  - position               # healthcare, university, workforce, edocument (nurse, doctor, faculty, staff, technician, etc.)
+  - adminRoles             # project-management (accountant, auditor, planner, manager)
+  - isChair                # university (True/False)
+  - isEmployee             # project-management (True/False)
+
+  # --- Organization ---
+  - department             # edocument, university, workforce, project-management
+  - tenant                 # edocument (largeBank, reseller, newsAgency, etc.)
+  - office                 # edocument (largeBankOffice1, etc.)
+  - provider               # workforce (eWorkforce, externalWorkforceSupplier, subcontractor)
+
+  # --- Location & Region ---
+  - ward                   # healthcare (oncWard, carWard)
+  - assignedTenant         # workforce (telco, powerProtection)
+  - assignedRegion         # workforce (south, north)
+
+  # --- Expertise & Skills ---
+  - specialties            # healthcare (oncology, cardiology, anesthesiology, etc.)
+  - expertise              # project-management (design, coding)
+  - certifications         # workforce (telcoCertifiedTechnician, powerProtectionSpecialist)
+
+  # --- Relationships ---
+  - teams                  # healthcare (oncTeam1, oncTeam2, carTeam1, carTeam2)
+  - agentFor               # healthcare (set of patient IDs)
+  - supervisor             # edocument
+  - supervisee             # edocument
+  - managedStaff           # workforce (set of technician IDs)
+
+  # --- Projects & Tasks ---
+  - projects               # edocument, project-management (set of doc/project IDs)
+  - projectsLed            # project-management
+  - tasks                  # project-management (set of task IDs)
+
+  # --- Courses (University) ---
+  - crsTaken               # university
+  - crsTaught              # university
+
+  # --- Permissions & Flags ---
+  - registered             # edocument (True/False)
+  - payrollingPermissions  # edocument (True/False)
+  - isCustomerSupport      # workforce (True/False)
+  - group                  # workforce (techSupport, provisioning, residentialSupport, companySupport, none)
+
+# ---- Resource Attributes ----
+# Extracted from resourceAttrib() declarations across all 5 .abac files.
+resource_attributes:
+  # --- Type & Classification ---
+  - type                   # all domains (HR, HRitem, task, budget, schedule, gradebook, roster, transcript, application, document, invoice, etc.)
+  - classification         # edocument (general, confidential)
+  - containsPersonalInfo   # edocument (True/False)
+  - proprietary            # project-management (True/False)
+
+  # --- Ownership & Authorship ---
+  - owner                  # edocument
+  - author                 # healthcare
+  - sender                 # edocument
+  - recipients             # edocument (set of user IDs)
+
+  # --- Subject References ---
+  - patient                # healthcare
+  - student                # university
+
+  # --- Organization ---
+  - department             # edocument, project-management, workforce
+  - departments            # university (set)
+  - tenant                 # edocument
+  - office                 # edocument
+  - provider               # workforce
+  - assignedTenant         # workforce
+  - assignedRegion         # workforce
+
+  # --- Location ---
+  - ward                   # healthcare
+  - location               # edocument
+
+  # --- Medical ---
+  - treatingTeam           # healthcare
+  - topics                 # healthcare (oncology, cardiology, nursing, note)
+
+  # --- Projects & Tasks ---
+  - project                # project-management, workforce
+  - expertise              # project-management (set, e.g., {design}, {coding})
+  - assignedTechnician     # workforce
+  - contractStatus         # workforce (active)
+
+  # --- Academic ---
+  - crs                    # university (course ID, e.g., cs101)
+
+# ---- Action Vocabulary ----
+# Extracted from rule() action sets across all 5 .abac files.
+action_attributes:
+  # --- Common CRUD ---
+  - read
+  - write
+  - view
+  - send
+  - create
+  - delete
+  - edit
+
+  # --- Healthcare ---
+  - addItem                # healthcare (add item to HR)
+  - addNote                # healthcare (add note to HR)
+
+  # --- University ---
+  - readMyScores           # university
+  - addScore               # university
+  - readScore              # university
+  - changeScore            # university
+  - assignGrade            # university
+  - checkStatus            # university
+  - setStatus              # university, project-management
+
+  # --- Project Management ---
+  - request                # project-management (request to work on task)
+
+  # --- Workforce ---
+  - complete               # workforce (complete a task)
+  - reassign               # workforce
+  - cancel                 # workforce
+  - dispatch               # workforce
+
+  # --- Document Management ---
+  - approve
+
+# ---- ABAC-Lab Operator Semantics ----
+# Maps ABAC-Lab syntax operators to canonical operators.
+operators:
+  "[":    "IN"             # subset/membership: attr [ {val1 val2}
+  "]":    "CONTAINS"       # superset: attr ] otherAttr (attr contains otherAttr)
+  ">":    "SUPERSET_EQ"    # superset-or-equal: attr > otherAttr
+  "=":    "EQUALS"         # equality: attr = otherAttr
+
+# ---- Environment Attributes (Contextual) ----
+# These are not present in ABAC-Lab datasets but are commonly used in ABAC.
+environment_attributes:
+  - time
+  - date
+  - ip_address
+  - location
+  - device_type
