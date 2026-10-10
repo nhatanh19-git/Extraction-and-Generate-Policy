@@ -3,7 +3,7 @@ import os
 import json
 from backend.abac_pipeline.pipeline import ABACPipeline
 
-def main():
+def cli_main():
     print("=====================================================")
     print("CHƯƠNG TRÌNH TRÍCH XUẤT CHÍNH SÁCH ABAC TỪ VĂN BẢN")
     print("=====================================================")
@@ -63,10 +63,10 @@ def main():
                 
             print(f"Actions (Hành động): {result.rule.actions}")
             
-            print("Resources (Tài nguyên):")
-            if not result.rule.resources:
+            print("Objects (Đối tượng):")
+            if not result.rule.objects:
                 print("  (Không có)")
-            for r in result.rule.resources:
+            for r in result.rule.objects:
                 print(f"  - Attribute: {r.attribute}, Operator: {r.operator}, Values: {r.values}")
                 
             print("Constraints (Ràng buộc):")
@@ -83,7 +83,7 @@ def main():
                     "effect": result.rule.effect,
                     "subjects": [{"attribute": s.attribute, "operator": s.operator, "values": s.values} for s in result.rule.subjects],
                     "actions": result.rule.actions,
-                    "resources": [{"attribute": r.attribute, "operator": r.operator, "values": r.values} for r in result.rule.resources],
+                    "objects": [{"attribute": r.attribute, "operator": r.operator, "values": r.values} for r in result.rule.objects],
                     "constraints": [{"attribute": c.attribute, "operator": c.operator, "values": c.values, "attribute_ref": c.attribute_ref} for c in result.rule.constraints]
                 }
             }
@@ -104,6 +104,19 @@ def main():
             break
         except Exception as e:
             print(f"\nCó lỗi xảy ra trong quá trình xử lý: {e}")
+
+def main():
+    if "--cli" in sys.argv:
+        cli_main()
+    else:
+        from PySide6.QtWidgets import QApplication
+        from main_window import MainWindow
+        
+        app = QApplication(sys.argv)
+        app.setStyle("Fusion")
+        window = MainWindow()
+        window.show()
+        sys.exit(app.exec())
 
 if __name__ == "__main__":
     main()
