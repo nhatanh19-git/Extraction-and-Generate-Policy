@@ -48,10 +48,10 @@ invoices	O
 
 A	O
 user	O
-working	O
-on	O
-a	O
-project	O
+working	B-CONSTRAINT
+on	I-CONSTRAINT
+a	I-CONSTRAINT
+project	I-CONSTRAINT
 can	O
 read	O
 the	O
@@ -71,9 +71,9 @@ scores	O
 in	O
 the	O
 gradebook	O
-for	O
-courses	O
-that	B-CONSTRAINT
+for	B-CONSTRAINT
+courses	I-CONSTRAINT
+that	I-CONSTRAINT
 they	I-CONSTRAINT
 are	I-CONSTRAINT
 teaching	I-CONSTRAINT
@@ -138,9 +138,9 @@ can	O
 only	O
 access	O
 tasks	O
-of	O
-customers	O
-which	B-CONSTRAINT
+of	B-CONSTRAINT
+customers	I-CONSTRAINT
+which	I-CONSTRAINT
 relate	I-CONSTRAINT
 to	I-CONSTRAINT
 their	I-CONSTRAINT

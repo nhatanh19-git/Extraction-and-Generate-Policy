@@ -11,7 +11,7 @@ class CanonicalABACRule:
     rule_id: str
     effect: str
     subjects: List[CanonicalCondition] = field(default_factory=list)
-    resources: List[CanonicalCondition] = field(default_factory=list)
+    objects: List[CanonicalCondition] = field(default_factory=list)
     actions: List[str] = field(default_factory=list)
     environment: List[CanonicalCondition] = field(default_factory=list)
     constraints: List[CanonicalCondition] = field(default_factory=list)
@@ -34,12 +34,12 @@ class CanonicalABACRule:
     def to_string(self) -> str:
         """Format the rule into a readable canonical syntax."""
         subj_str = ", ".join([f"S({c.attribute}, {c.operator}, {self._fmt_val(c)})" for c in self.subjects])
-        res_str = ", ".join([f"R({c.attribute}, {c.operator}, {self._fmt_val(c)})" for c in self.resources])
+        obj_str = ", ".join([f"O({c.attribute}, {c.operator}, {self._fmt_val(c)})" for c in self.objects])
         act_str = f"A({', '.join(self.actions)})"
         
         parts = []
         if subj_str: parts.append(subj_str)
-        if res_str: parts.append(res_str)
+        if obj_str: parts.append(obj_str)
         if act_str: parts.append(act_str)
         
         if self.constraints:
@@ -49,7 +49,7 @@ class CanonicalABACRule:
         return f"RULE({self.effect.upper()}: {'; '.join(parts)})"
 
     def to_abac_lab_syntax(self) -> str:
-        """Format the rule into ABAC-Lab syntax: rule(subj_cond ; res_cond ; {actions} ; constraint)."""
+        """Format the rule into ABAC-Lab syntax: rule(subj_cond ; obj_cond ; {actions} ; constraint)."""
         def format_conds(conds: List[CanonicalCondition]) -> str:
             parts = []
             for c in conds:
@@ -57,8 +57,8 @@ class CanonicalABACRule:
             return " ^ ".join(parts) if parts else ""
 
         subj_str = format_conds(self.subjects)
-        res_str = format_conds(self.resources)
+        obj_str = format_conds(self.objects)
         act_str = "{" + " ".join(self.actions) + "}"
         const_str = format_conds(self.constraints)
         
-        return f"rule({subj_str} ; {res_str} ; {act_str} ; {const_str})"
+        return f"rule({subj_str} ; {obj_str} ; {act_str} ; {const_str})"

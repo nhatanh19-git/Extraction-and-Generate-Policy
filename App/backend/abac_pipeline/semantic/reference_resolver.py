@@ -12,7 +12,7 @@ class ReferenceResolver:
         self.subject_pronouns = {"he", "him", "his", "she", "her", "hers", "they", "them", "their", "user"}
         
         # Pronouns typically referring to the resource/object
-        self.resource_pronouns = {"it", "its", "which", "that", "this", "file", "document", "record", "item"}
+        self.resource_pronouns = {"it", "its", "this", "file", "document", "record", "item"}
         
     def resolve_reference(self, token_text: str, entities: List[ABACEntity]) -> Optional[ABACEntity]:
         """Attempt to resolve a pronoun to an entity in the sentence.

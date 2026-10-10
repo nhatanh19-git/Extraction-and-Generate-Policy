@@ -95,7 +95,7 @@ def run_tests():
         rule = result.rule
         print(f"  Effect: {rule.effect}")
         print(f"  Subjects: {[{'attr': s.attribute, 'op': s.operator, 'val': s.values} for s in rule.subjects]}")
-        print(f"  Resources: {[{'attr': r.attribute, 'op': r.operator, 'val': r.values} for r in rule.resources]}")
+        print(f"  Objects: {[{'attr': r.attribute, 'op': r.operator, 'val': r.values} for r in rule.objects]}")
         print(f"  Actions: {rule.actions}")
         print(f"  Constraints: {[{'attr': c.attribute, 'op': c.operator, 'val': c.values, 'ref': c.attribute_ref} for c in rule.constraints]}")
         

@@ -23,64 +23,93 @@ class BIOConstraintGenerator:
             
         # Condition indicators for weak labeling
         self.condition_markers = {"if", "when", "unless", "provided", "where", "assuming"}
-        # "only" is tricky because it modifies the subject or action, we don't want to capture the whole sentence.
         
-    def _weak_label_constraint_span(self, doc: spacy.tokens.Doc) -> Tuple[int, int]:
-        """Heuristically find the start and end token indices of a constraint clause."""
-        best_start = -1
-        best_end = -1
+    def _weak_label_constraint_spans(self, doc: spacy.tokens.Doc) -> List[Tuple[int, int]]:
+        """Heuristically find ALL constraint span (start, end) token indices in a sentence.
+        
+        Returns a list of (start, end) tuples, one per constraint span found.
+        """
+        spans = []
         
         # 1. Look for explicit condition markers (if, when, unless...)
         for token in doc:
             if token.lower_ in self.condition_markers and (token.dep_ == "mark" or token.dep_ == "advmod" or token.pos_ == "SCONJ"):
-                # Use the subtree of the head of this marker, or the subtree of the marker itself
                 head = token.head
                 if head.pos_ in ("VERB", "AUX") and head != token:
                     subtree_indices = sorted([t.i for t in head.subtree])
                 else:
                     subtree_indices = sorted([t.i for t in token.subtree])
                 
-                # Exclude main clause subject/object if they got dragged in
-                # Actually, an advcl subtree is usually pretty self-contained
                 start, end = subtree_indices[0], subtree_indices[-1]
-                # Try to tighten the span: start at the marker itself
                 if token.i >= start:
                     start = token.i
-                return start, end
+                spans.append((start, end))
                 
         # 2. Look for relative clauses (relcl) that act as constraints
-        # E.g., "... documents belonging to tenants they are assigned responsible."
-        # E.g., "... tasks that are assigned to them."
         for token in doc:
             if token.dep_ == "relcl":
-                subtree_indices = sorted([t.i for t in token.subtree])
-                return subtree_indices[0], subtree_indices[-1]
+                head = token.head
+                # If relcl modifies a noun that is a pobj of a preposition, include the prep!
+                # e.g. "for courses which they are taking"
+                if head.dep_ == "pobj" and head.head.dep_ == "prep":
+                    subtree_indices = sorted([t.i for t in head.head.subtree])
+                else:
+                    subtree_indices = sorted([t.i for t in token.subtree])
+                spans.append((subtree_indices[0], subtree_indices[-1]))
                 
-        # 3. Look for prepositional phrases acting as constraints
-        # E.g., "... invoices sent by the department." (acl or prep)
+        # 3. Look for participial phrases acting as constraints (acl)
         for token in doc:
-            if token.dep_ == "acl" and token.head.dep_ in ("dobj", "pobj"):
+            if token.dep_ == "acl" and token.head.dep_ in ("dobj", "pobj", "nsubj", "nsubjpass"):
                 subtree_indices = sorted([t.i for t in token.subtree])
-                return subtree_indices[0], subtree_indices[-1]
+                spans.append((subtree_indices[0], subtree_indices[-1]))
 
-        # 4. Handle "Only" patterns specifically
-        # E.g., "Only members of the sales department can send invoices."
-        # Constraint is "of the sales department". The word "Only" just indicates a restriction.
+        # 4. Handle "Only" patterns — prepositional phrase on the subject
         for token in doc:
             if token.lower_ == "only":
-                # Look for a prepositional phrase modifying the subject
                 head = token.head
                 if head.dep_ == "nsubj":
                     for child in head.children:
                         if child.dep_ == "prep":
                             subtree_indices = sorted([t.i for t in child.subtree])
-                            return subtree_indices[0], subtree_indices[-1]
+                            spans.append((subtree_indices[0], subtree_indices[-1]))
         
-        return best_start, best_end
+        # 5. Look for "with" prepositional phrases attached to the main verb
+        # E.g., "... can modify grades with the approval of the head of ..."
+        # These are environmental / contextual constraints.
+        for token in doc:
+            if token.dep_ == "ROOT":
+                for child in token.children:
+                    if child.dep_ == "prep" and child.lower_ == "with":
+                        subtree_indices = sorted([t.i for t in child.subtree])
+                        spans.append((subtree_indices[0], subtree_indices[-1]))
+        
+        # Deduplicate and merge overlapping spans
+        if not spans:
+            return []
+        
+        spans.sort()
+        merged = [spans[0]]
+        for s, e in spans[1:]:
+            prev_s, prev_e = merged[-1]
+            if s <= prev_e + 1:
+                # Overlapping or adjacent — merge
+                merged[-1] = (prev_s, max(prev_e, e))
+            else:
+                merged.append((s, e))
+                
+        return merged
+
+    # Keep the old single-span API for backward compatibility (used by pipeline heuristic fallback)
+    def _weak_label_constraint_span(self, doc: spacy.tokens.Doc) -> Tuple[int, int]:
+        """Return the first constraint span found (backward-compatible single-span API)."""
+        spans = self._weak_label_constraint_spans(doc)
+        if spans:
+            return spans[0]
+        return (-1, -1)
 
     def generate_bio(self, rules: List[ABACPolicyRule]) -> List[List[Tuple[str, str]]]:
         """Generate BIO tagged sequences for a list of rules.
-        Format: [[("A", "O"), ("user", "O"), ("can", "O"), ("read", "O"), ("if", "B-CONSTRAINT"), ...], ...]
+        Format: [("A", "O"), ("user", "O"), ("can", "O"), ("read", "O"), ("if", "B-CONSTRAINT"), ...]
         """
         dataset = []
         
@@ -91,25 +120,25 @@ class BIOConstraintGenerator:
             doc = self.nlp(rule.description)
             
             for sent in doc.sents:
-                start_idx, end_idx = -1, -1
+                constraint_ranges = []
                 
                 # We only tag constraints if the rule actually has one in its syntax
                 if rule.constraint_condition:
-                    start_idx, end_idx = self._weak_label_constraint_span(sent.as_doc())
-                    # Adjust relative indices from sent.as_doc() to original doc indices
-                    # sent.as_doc() is an independent Doc, so indices are 0-based
+                    constraint_ranges = self._weak_label_constraint_spans(sent.as_doc())
                 
                 tagged_sentence = []
                 for i, token in enumerate(sent):
                     label = "O"
-                    if start_idx != -1 and start_idx <= i <= end_idx:
-                        # Ignore trailing punctuation for constraint span
-                        if token.is_punct and i == end_idx:
-                            label = "O"
-                        elif i == start_idx:
-                            label = "B-CONSTRAINT"
-                        else:
-                            label = "I-CONSTRAINT"
+                    for start_idx, end_idx in constraint_ranges:
+                        if start_idx <= i <= end_idx:
+                            # Ignore trailing punctuation for constraint span
+                            if token.is_punct and i == end_idx:
+                                label = "O"
+                            elif i == start_idx:
+                                label = "B-CONSTRAINT"
+                            else:
+                                label = "I-CONSTRAINT"
+                            break
                             
                     tagged_sentence.append((token.text, label))
                     
