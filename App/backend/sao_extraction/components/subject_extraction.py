@@ -42,18 +42,18 @@ def expand_noun_phrase(token: Any) -> str:
     str
         The NP text with original casing and spacing.
     """
-    # Gather subtree indices, excluding relcl subtrees
-    relcl_roots: set[int] = {
+    # Gather subtree indices, excluding relcl and prep subtrees
+    excluded_roots: set[int] = {
         child.i
         for child in token.children
-        if child.dep_ == _RELCL_DEP
+        if child.dep_ in (_RELCL_DEP, "prep")
     }
-    # Expand each relcl to exclude its whole subtree
+    # Expand each excluded root to exclude its whole subtree
     excluded: set[int] = set()
-    for relcl_root_i in relcl_roots:
+    for root_i in excluded_roots:
         # Retrieve the token object from the doc
-        relcl_token = token.doc[relcl_root_i]
-        for t in relcl_token.subtree:
+        excluded_token = token.doc[root_i]
+        for t in excluded_token.subtree:
             excluded.add(t.i)
 
     kept = sorted(
