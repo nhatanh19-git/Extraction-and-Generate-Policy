@@ -117,6 +117,36 @@ class NLPPreprocessor:
         self.nlp = spacy.load(spacy_model)
         self._model_name = spacy_model
     
+    def _fix_spacy_misparses(self, doc: Doc) -> Doc:
+        """Fix recurring spaCy parse anomalies in ACP texts."""
+        # 1. Action verbs conjoined to aux/verb (e.g. view and download)
+        for tok in doc:
+            if tok.text.lower() in ("download", "view", "modify", "upload", "create", "delete", "update") and tok.dep_ == "conj" and tok.head.pos_ in ("VERB", "AUX"):
+                tok.pos_ = "VERB"
+                tok.tag_ = "VB"
+                
+        # 2. "learning management system(s)" parse anomaly where "learning" is parsed as VERB
+        for i, tok in enumerate(doc):
+            if tok.text.lower() == "learning" and i + 1 < len(doc) and "management" in doc[i + 1].text.lower():
+                systems_tok = None
+                for j in range(i + 1, min(i + 4, len(doc))):
+                    if "system" in doc[j].text.lower():
+                        systems_tok = doc[j]
+                        break
+                if systems_tok:
+                    tok.pos_ = "NOUN"
+                    tok.tag_ = "NN"
+                    tok.dep_ = "compound"
+                    tok.head = systems_tok
+                    if i >= 2 and doc[i - 1].text.lower() == "and":
+                        info_tok = doc[i - 2]
+                        systems_tok.dep_ = "conj"
+                        systems_tok.head = info_tok
+                    for next_tok in doc[systems_tok.i + 1 : min(systems_tok.i + 4, len(doc))]:
+                        if next_tok.dep_ == "prep" and next_tok.head.i == tok.i:
+                            next_tok.head = systems_tok
+        return doc
+
     def process(self, text: str) -> NLPResult:
         """Process raw ACP text into a complete NLPResult.
         
@@ -139,6 +169,7 @@ class NLPPreprocessor:
         
         # Step 3: spaCy parse
         doc = self.nlp(normalized)
+        doc = self._fix_spacy_misparses(doc)
         
         # Step 4: Extract token-level features
         tokens = []

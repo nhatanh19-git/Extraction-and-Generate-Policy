@@ -39,8 +39,8 @@ class ConstraintAnalyzer:
                     
         return []
 
-    def _extract_arguments(self, doc: spacy.tokens.Doc, root: spacy.tokens.Token) -> Tuple[Optional[str], Optional[str]]:
-        """Extract left and right arguments using dependency paths from the root verb."""
+    def _extract_arguments(self, doc: spacy.tokens.Doc, root: spacy.tokens.Token, span_start: int = 0, span_end: int = -1) -> Tuple[Optional[str], Optional[str]]:
+        """Extract left and right arguments using dependency paths from the root verb, bounded by span if provided."""
         left_operand = None
         right_operand = None
         
@@ -62,7 +62,9 @@ class ConstraintAnalyzer:
         # Check direct objects and attributes
         for child in root.children:
             if child.dep_ in ("dobj", "attr", "acomp", "pobj"):
-                right_operand = doc[child.left_edge.i : child.right_edge.i + 1].text
+                r_start = max(child.left_edge.i, span_start) if span_start != -1 else child.left_edge.i
+                r_end = min(child.right_edge.i, span_end) if span_end != -1 else child.right_edge.i
+                right_operand = doc[r_start : r_end + 1].text
                 break
             elif child.dep_ in ("prep", "agent"):
                 # E.g. "assigned to them", "works in which", "sent by them"
@@ -72,7 +74,9 @@ class ConstraintAnalyzer:
                         if grandchild.lemma_.lower() in ("which", "that", "who", "whom") and root.dep_ in ("relcl", "acl"):
                             right_operand = root.head.lemma_
                         else:
-                            right_operand = doc[grandchild.left_edge.i : grandchild.right_edge.i + 1].text
+                            r_start = max(grandchild.left_edge.i, span_start) if span_start != -1 else grandchild.left_edge.i
+                            r_end = min(grandchild.right_edge.i, span_end) if span_end != -1 else grandchild.right_edge.i
+                            right_operand = doc[r_start : r_end + 1].text
                         break
         
         # Another case: if root is relcl and we haven't found a right operand, the head might be the right operand
@@ -133,7 +137,7 @@ class ConstraintAnalyzer:
         canonical_operator = normalize_operator(operator_text)
         
         # 3. Extract Arguments
-        left_operand, right_operand = self._extract_arguments(doc, root)
+        left_operand, right_operand = self._extract_arguments(doc, root, constraint.start, constraint.end)
         
         # 4. Resolve pronouns in the extracted arguments
         if left_operand:

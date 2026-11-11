@@ -83,6 +83,8 @@ class AttributeMapper:
 
     def map_condition(self, condition: CanonicalCondition, is_subject: bool = True) -> CanonicalCondition:
         """Maps attributes in a condition to canonical schema."""
+        if condition.attribute.startswith(("subject.", "object.", "resource.", "environment.", "enviroment.")):
+            return condition
         
         # In ABAC, constraint conditions are often evaluated against the context or the opposite entity.
         # But by default, if it's modifying a subject, we map its attribute against the subject vocab.

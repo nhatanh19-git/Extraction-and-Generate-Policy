@@ -377,11 +377,33 @@ class ABACPipeline:
                 for child in ent_root.children:
                     if child.dep_ == "prep" and child.i > ent.span_end:
                         subtree = sorted([t.i for t in child.subtree])
-                        qualifiers.append(ConstraintSpan(
-                            text=doc[subtree[0]:subtree[-1]+1].text,
-                            start=subtree[0],
-                            end=subtree[-1]
-                        ))
+                        sub_start = subtree[0]
+                        sub_end = subtree[-1]
+                        
+                        # Check for nested prepositions inside child subtree
+                        nested_start = -1
+                        for t_idx in subtree:
+                            if doc[t_idx].dep_ == "prep" and doc[t_idx].i > child.i:
+                                nested_start = doc[t_idx].i
+                                break
+                                
+                        if nested_start != -1:
+                            qualifiers.append(ConstraintSpan(
+                                text=doc[sub_start:nested_start].text.strip(),
+                                start=sub_start,
+                                end=nested_start - 1
+                            ))
+                            true_constraint_spans.append(ConstraintSpan(
+                                text=doc[nested_start:sub_end + 1].text.strip(),
+                                start=nested_start,
+                                end=sub_end
+                            ))
+                        else:
+                            qualifiers.append(ConstraintSpan(
+                                text=doc[sub_start:sub_end + 1].text.strip(),
+                                start=sub_start,
+                                end=sub_end
+                            ))
             return qualifiers
             
         for ent in entities:
@@ -390,7 +412,34 @@ class ABACPipeline:
             elif ent.type == "OBJECT":
                 object_qualifier_spans.extend(_extract_prep_qualifiers(ent))
         
+        # Filter and clip constraint_spans against subject/object qualifiers
+        all_qualifiers = subject_qualifier_spans + object_qualifier_spans
+        filtered_constraint_spans = []
         for c_span in constraint_spans:
+            overlapping_q = None
+            for q in all_qualifiers:
+                if c_span.start <= q.end and c_span.end >= q.start:
+                    overlapping_q = q
+                    break
+            if overlapping_q:
+                if c_span.start >= overlapping_q.start and c_span.end <= overlapping_q.end:
+                    continue
+                elif c_span.start <= overlapping_q.end < c_span.end:
+                    new_start = overlapping_q.end + 1
+                    if new_start <= c_span.end:
+                        c_span = ConstraintSpan(
+                            text=doc[new_start : c_span.end + 1].text.strip(),
+                            start=new_start,
+                            end=c_span.end
+                        )
+                    else:
+                        continue
+            
+            if any(t.start == c_span.start and t.end == c_span.end for t in true_constraint_spans):
+                continue
+            filtered_constraint_spans.append(c_span)
+
+        for c_span in filtered_constraint_spans:
             is_subject_qualifier = False
             is_object_qualifier = False
             # Check if the constraint span's head token (in dep tree) is part of an entity
@@ -414,7 +463,8 @@ class ABACPipeline:
                 if not any(s.start == c_span.start for s in object_qualifier_spans):
                     object_qualifier_spans.append(c_span)
             else:
-                true_constraint_spans.append(c_span)
+                if not any(t.start == c_span.start and t.end == c_span.end for t in true_constraint_spans):
+                    true_constraint_spans.append(c_span)
         
         # 4. Analyze only TRUE constraints
         canonical_constraints = []
@@ -452,20 +502,6 @@ class ABACPipeline:
                     operator="IN",
                     values=[mapped_attr]
                 ))
-                
-                # Add subject qualifier spans to constraints
-                for sq_span in subject_qualifier_spans:
-                    sq_cond = self.analyzer.analyze(sq_span, doc, entities)
-                    if sq_cond and sq_cond.values:
-                        # Infer the attribute name from the values (e.g. "sales department" -> department)
-                        val_text = " ".join(sq_cond.values)
-                        inferred = self._infer_attribute_from_text(val_text, doc)
-                        canonical_constraints.append(CanonicalCondition(
-                            attribute=f"subject.{inferred}",
-                            operator="IN",
-                            values=sq_cond.values
-                        ))
-                        
             elif ent.type == "OBJECT":
                 mapped_attr = self.mapper._find_best_match(ent.lemma, self.mapper.resource_vocab)
                 attr_name = self._infer_object_attribute(ent, doc)
@@ -474,21 +510,57 @@ class ABACPipeline:
                     operator="IN",
                     values=[mapped_attr]
                 ))
-                
-                # Add object qualifier spans to constraints
-                for oq_span in object_qualifier_spans:
-                    oq_cond = self.analyzer.analyze(oq_span, doc, entities)
-                    if oq_cond and oq_cond.values:
-                        val_text = " ".join(oq_cond.values)
-                        inferred = self._infer_attribute_from_text(val_text, doc)
-                        canonical_constraints.append(CanonicalCondition(
-                            attribute=f"object.{inferred}",
-                            operator="IN",
-                            values=oq_cond.values
-                        ))
             elif ent.type == "ACTION":
                 mapped_action = self.mapper._find_best_match(ent.lemma, self.mapper.action_vocab)
                 actions.append(mapped_action)
+
+        # Add subject qualifier spans to constraints
+        for sq_span in subject_qualifier_spans:
+            sq_cond = self.analyzer.analyze(sq_span, doc, entities)
+            if sq_cond and sq_cond.values:
+                # Infer the attribute name from the values (e.g. "sales department" -> department)
+                val_text = " ".join(sq_cond.values)
+                inferred = self._infer_attribute_from_text(val_text, doc)
+                canonical_constraints.append(CanonicalCondition(
+                    attribute=f"subject.{inferred}",
+                    operator="IN",
+                    values=sq_cond.values
+                ))
+
+        # Add object qualifier spans to constraints
+        for oq_span in object_qualifier_spans:
+            oq_cond = self.analyzer.analyze(oq_span, doc, entities)
+            if oq_cond and oq_cond.values:
+                val_text = " ".join(oq_cond.values)
+                inferred = self._infer_attribute_from_text(val_text, doc)
+                
+                clean_values = []
+                for val in oq_cond.values:
+                    if inferred == "system":
+                        for env_c in canonical_constraints:
+                            if env_c.attribute in ("enviroment.system", "environment.system", "enviroment.course", "environment.course") and env_c.values:
+                                for ev in env_c.values:
+                                    val = val.replace(f" for {ev}", "").strip()
+                        if " for courses which " in val:
+                            val = val.split(" for courses which ")[0].strip()
+                    clean_values.append(val)
+                    
+                canonical_constraints.append(CanonicalCondition(
+                    attribute=f"object.{inferred}",
+                    operator="IN",
+                    values=clean_values
+                ))
+
+        # Deduplicate constraints preserving order
+        dedup_constraints = []
+        seen = set()
+        for c in canonical_constraints:
+            vals_key = tuple(sorted(c.values)) if c.values else ()
+            key = (c.attribute, c.operator, vals_key, c.attribute_ref)
+            if key not in seen:
+                seen.add(key)
+                dedup_constraints.append(c)
+        canonical_constraints = dedup_constraints
         
         # 7. Detect effect
         effect = self._detect_effect(text, doc)
@@ -596,6 +668,23 @@ class ABACPipeline:
                 if main_noun:
                     cond = dataclasses.replace(cond, attribute=f"environment.{main_noun}")
             
+        elif not is_subject and not is_object:
+            right_text = " ".join(cond.values) if cond.values else ""
+            if cond.attribute.startswith("enviroment.") or cond.attribute.startswith("environment."):
+                return cond
+            if attr_text == "system":
+                if "department" in right_text.lower() and "course" in right_text.lower():
+                    return dataclasses.replace(cond, attribute="enviroment.course")
+                elif "course" in right_text.lower() and "which" not in right_text.lower():
+                    return dataclasses.replace(cond, attribute="enviroment.course")
+                else:
+                    return dataclasses.replace(cond, attribute="enviroment.system")
+            elif "course" in attr_text:
+                return dataclasses.replace(cond, attribute="enviroment.course")
+            
+        elif attr_text == "system":
+            cond = dataclasses.replace(cond, attribute="enviroment.system")
+            
         return cond
     
     def _infer_subject_attribute(self, entity: ABACEntity, doc: Doc) -> str:
@@ -687,6 +776,10 @@ class ABACPipeline:
         for term in location_indicators:
             if term in text_lower:
                 return "location"
+        
+        # System indicators
+        if "system" in text_lower:
+            return "system"
         
         # Use spaCy to find the main noun (head of the NP)
         val_doc = self.preprocessor.nlp(text)
